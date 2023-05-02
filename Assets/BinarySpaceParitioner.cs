@@ -5,7 +5,7 @@ using UnityEngine;
 
 using Random = UnityEngine.Random;
 
-public class BinarySpaceParitioner
+public class BinarySpacePartitioner
 {
 	RoomNode rootNode;
 
@@ -14,7 +14,7 @@ public class BinarySpaceParitioner
 		get => rootNode;
 	}
 
-	public BinarySpaceParitioner(int dungeonWidth, int dungeonLength)
+	public BinarySpacePartitioner(int dungeonWidth, int dungeonLength)
 	{
 		this.rootNode = new RoomNode(new Vector2Int(0, 0), new Vector2Int(dungeonWidth, dungeonLength), null, 0);
 	}
@@ -23,6 +23,7 @@ public class BinarySpaceParitioner
 	{
 		Queue<RoomNode> graph = new Queue<RoomNode>();
 		List<RoomNode> listToReturn = new List<RoomNode>();
+		graph.Enqueue(this.rootNode);
 		listToReturn.Add(this.rootNode);
 		int iterations = 0;
 		while(iterations < maxIterations && graph.Count > 0)
@@ -42,33 +43,32 @@ public class BinarySpaceParitioner
 	{
 		Line line = GetLineDividingSpace
 			(
-			 currentNode.BottomLeftAreaCorner, currentNode,
+			 currentNode.BottomLeftAreaCorner,
 			 currentNode.TopRightAreaCorner,
 			 roomWidthMin,
-			 roomLengthMin
-			);
+			 roomLengthMin);
 
 		RoomNode node1, node2;
 		if(line.Orientation == Orientation.Horizontal)
 		{
 			node1 = new RoomNode(currentNode.BottomLeftAreaCorner, new Vector2Int(currentNode.TopRightAreaCorner.x, line.Coordinates.y)
-			                   , currentNode, currentNode.TreeKayerIndex + 1);
+			                   , currentNode, currentNode.TreeLayerIndex + 1);
 			
 			node2 = new RoomNode(new Vector2Int(currentNode.BottomLeftAreaCorner.x, line.Coordinates.y),
 			                     currentNode.TopRightAreaCorner, 
 			                     currentNode, 
-			                     currentNode.TreeKayerIndex + 1);
+			                     currentNode.TreeLayerIndex + 1);
 		}
 		else
 		{
 			node1 = new RoomNode(currentNode.BottomLeftAreaCorner, 
 			                     new Vector2Int(line.Coordinates.x, currentNode.TopRightAreaCorner.y)
-			                   , currentNode, currentNode.TreeKayerIndex + 1);
+			                   , currentNode, currentNode.TreeLayerIndex + 1);
 			
 			node2 = new RoomNode(new Vector2Int(line.Coordinates.x,currentNode.BottomLeftAreaCorner.y),
 			                     currentNode.TopRightAreaCorner, 
 			                     currentNode, 
-			                     currentNode.TreeKayerIndex + 1);
+			                     currentNode.TreeLayerIndex + 1);
 		}
 
 		AddNewNodeToCollections(listToReturn, graph, node1);
@@ -81,7 +81,7 @@ public class BinarySpaceParitioner
 		graph.Enqueue(node);
 	}
 
-	private Line GetLineDividingSpace(Vector2Int bottomLeftAreaCorner, RoomNode _currentNode, Vector2Int topRightAreaCorner, int roomWidthMin, int roomLengthMin)
+	private Line GetLineDividingSpace(Vector2Int bottomLeftAreaCorner, Vector2Int topRightAreaCorner, int roomWidthMin, int roomLengthMin)
 	{
 		Orientation orientation;
 		bool lengthStatus = (topRightAreaCorner.y - bottomLeftAreaCorner.y) >= 2 * roomLengthMin;
@@ -89,7 +89,7 @@ public class BinarySpaceParitioner
 
 		if(lengthStatus && widthStatus)
 		{
-			orientation = (Orientation) (Random.Range(0, 2));
+			orientation = (Orientation)(Random.Range(0, 2));
 		}
 		else if(widthStatus)
 		{

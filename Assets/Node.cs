@@ -20,7 +20,7 @@ public abstract class Node
 
 	public Node Parent { get; set; }
 
-	public int TreeKayerIndex { get; set; }
+	public int TreeLayerIndex { get; set; }
 
 	public Node(Node parentNode)
 	{
