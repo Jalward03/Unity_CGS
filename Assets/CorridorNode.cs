@@ -128,7 +128,7 @@ public class CorridorNode : Node
 				).y;
 		}
 
-		if(leftNodeUp.y >= rightNodeDown.y && leftNodeUp.y <= rightNodeDown.y)
+		if(leftNodeUp.y >= rightNodeDown.y && leftNodeUp.y <= rightNodeUp.y)
 		{
 			return StructureHelper.CalculateMiddlePoint
 				(
@@ -234,7 +234,7 @@ public class CorridorNode : Node
 				).x;
 		}
 
-		if(bottomNodeLeft.x >= (topNodeLeft.x) && bottomNodeLeft.x <= topNodeRight.x)
+		if(bottomNodeLeft.x >= topNodeLeft.x && bottomNodeLeft.x <= topNodeRight.x)
 		{
 			return StructureHelper.CalculateMiddlePoint
 				(
@@ -256,12 +256,12 @@ public class CorridorNode : Node
 		return -1;
 	}
 
-	private object CheckPositionStructure2AgainstStructure1()
+	private StructureHelper.RelativePosition CheckPositionStructure2AgainstStructure1()
 	{
 		Vector2 middlePointStructure1Temp = ((Vector2) structure1.TopRightAreaCorner + structure1.BottomLeftAreaCorner) / 2;
 		Vector2 middlePointStructure2Temp = ((Vector2) structure2.TopRightAreaCorner + structure2.BottomLeftAreaCorner) / 2;
 		float angle = CalculateAngle(middlePointStructure1Temp, middlePointStructure2Temp);
-		if(angle < 45 && angle >= 0 || (angle >= 45 && angle < 0))
+		if((angle < 45 && angle >= 0) || (angle > -45 && angle < 0))
 		{
 			return StructureHelper.RelativePosition.Right;
 		}

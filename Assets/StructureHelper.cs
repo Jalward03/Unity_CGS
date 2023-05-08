@@ -80,6 +80,6 @@ public static class StructureHelper
 		Vector2 sum = v1 + v2;
 		Vector2 tempVector = sum / 2;
 
-		return new Vector2Int((int) tempVector.x, (int) tempVector.y);
+		return new Vector2Int((int)tempVector.x, (int)tempVector.y);
 	}
 }
