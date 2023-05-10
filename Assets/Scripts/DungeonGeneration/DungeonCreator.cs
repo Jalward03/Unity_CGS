@@ -15,14 +15,14 @@ public class DungeonCreator : MonoBehaviour
 	public Material floorMat;
 	public Material ceilingMat;
 	[Range(0.0f, 0.3f)] public float roomBottomCornerModifier;
-	[Range(0.7f, 1.0f)] public float roomTopCornerMidifier;
+	[Range(0.7f, 1.0f)] public float roomTopCornerModifier;
 	[Range(0, 3)] public int roomOffset;
 	public GameObject wallVertical, wallHorizontal;
+	public GameObject player;
 	[Range(1.0f, 5.0f)] public int ceilingHeight;
 	List<Vector3Int> possibleDoorVerticalPosition;
 	List<Vector3Int> possibleDoorHorizontalPosition;
 	List<Vector3Int> possibleWallHorizontalPosition;
-
 	List<Vector3Int> possibleWallVerticalPosition;
 
 	// Start is called before the first frame update
@@ -30,6 +30,7 @@ public class DungeonCreator : MonoBehaviour
 	{
 		CreateDungeon();
 	}
+
 
 	public void CreateDungeon()
 	{
@@ -41,7 +42,7 @@ public class DungeonCreator : MonoBehaviour
 		                                             roomWidthMin,
 		                                             roomLengthMin,
 		                                             roomBottomCornerModifier,
-		                                             roomTopCornerMidifier,
+		                                             roomTopCornerModifier,
 		                                             roomOffset,
 		                                             corridorWidth);
 		GameObject wallParent = new GameObject("WallParent");
@@ -55,11 +56,22 @@ public class DungeonCreator : MonoBehaviour
 		{
 			CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner);
 			CreateCeiling(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner, ceilingHeight);
+
+			if(i == 0)
+			{
+				SpawnPlayer(new Vector3(
+					(listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2, 
+					1, 
+					(listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
+			}
 		}
 
 		CreateWalls(wallParent);
 	}
-
+	public void SpawnPlayer(Vector3 position)
+	{
+		Instantiate(player, position, Quaternion.identity);
+	}
 	private void CreateWalls(GameObject wallParent)
 	{
 		foreach(var wallPosition in possibleWallHorizontalPosition)

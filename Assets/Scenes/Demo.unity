@@ -161,11 +161,12 @@ MonoBehaviour:
   floorMat: {fileID: 2100000, guid: b6df9718aa8737b4e86604fe29878535, type: 2}
   ceilingMat: {fileID: 2100000, guid: 094c835627124fe4bbbaa762d2240cb1, type: 2}
   roomBottomCornerModifier: 0.1
-  roomTopCornerMidifier: 0.7
+  roomTopCornerModifier: 0.7
   roomOffset: 3
   wallVertical: {fileID: 4248786690725703521, guid: 76257fc4964cd484989e3a56a342b94e, type: 3}
   wallHorizontal: {fileID: 3869485460581719910, guid: 0b84e1940b269ca4fbec190d930348ae, type: 3}
-  ceilingHeight: 1
+  player: {fileID: 5400785842755360256, guid: 439561c5107f0db4cb93f7b572cdfc2a, type: 3}
+  ceilingHeight: 2
 --- !u!4 &106468870
 Transform:
   m_ObjectHideFlags: 0
@@ -198,7 +199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1374318794
 AudioListener:
   m_ObjectHideFlags: 0
