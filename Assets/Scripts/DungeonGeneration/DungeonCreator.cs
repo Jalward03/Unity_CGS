@@ -28,8 +28,7 @@ public class DungeonCreator : MonoBehaviour
 	List<Vector3Int> possibleWallHorizontalPosition;
 	List<Vector3Int> possibleWallVerticalPosition;
 
-	[Header("Furniture")]
-	public GameObject torch;
+	[Header("Furniture")] public GameObject torch;
 
 	public GameObject wallFurniture;
 	public List<GameObject> furnitureList;
@@ -65,7 +64,6 @@ public class DungeonCreator : MonoBehaviour
 			CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner);
 			CreateCeiling(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner, ceilingHeight);
 
-			
 			// Spawn Room
 			if(i == 0)
 			{
@@ -93,14 +91,16 @@ public class DungeonCreator : MonoBehaviour
 
 			if(i > 0 && i > listOfRooms.Count / 2)
 			{
-				Instantiate(wallFurniture, new 
-					            Vector3(
-					                    (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
-					                    ceilingHeight * 1.18f,
-					                    (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2 - (corridorWidth / 2)),
-				            Quaternion.Euler(-90, 180, 0));
+				if((listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) < (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.x))
+				{
+					Instantiate(wallFurniture, new
+						            Vector3(
+						                    (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
+						                    ceilingHeight * 1.18f,
+						                    (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2 - (corridorWidth / 2)),
+					            Quaternion.Euler(-90, 180, 0));
+				}
 			}
-			
 		}
 
 		CreateWalls(wallParent);
