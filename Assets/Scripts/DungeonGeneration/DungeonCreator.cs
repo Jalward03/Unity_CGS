@@ -8,22 +8,28 @@ using Random = UnityEngine.Random;
 
 public class DungeonCreator : MonoBehaviour
 {
-	public int dungeonWidth, dungeonLength;
-	public int roomWidthMin, roomLengthMin;
+	[Header("Dungeon Attributes")] public int dungeonWidth;
+	public int dungeonLength;
+	public int roomWidthMin;
+	public int roomLengthMin;
 	public int maxIterations;
 	public int corridorWidth;
 	public Material floorMat;
 	public Material ceilingMat;
 	[Range(0.0f, 0.3f)] public float roomBottomCornerModifier;
 	[Range(0.7f, 1.0f)] public float roomTopCornerModifier;
+	[Range(1.0f, 5.0f)] public int ceilingHeight;
 	[Range(0, 3)] public int roomOffset;
+
 	public GameObject wallVertical, wallHorizontal;
 	public GameObject player;
-	[Range(1.0f, 5.0f)] public int ceilingHeight;
 	List<Vector3Int> possibleDoorVerticalPosition;
 	List<Vector3Int> possibleDoorHorizontalPosition;
 	List<Vector3Int> possibleWallHorizontalPosition;
 	List<Vector3Int> possibleWallVerticalPosition;
+
+	[Header("Furniture")] public GameObject torch;
+	public List<GameObject> furnitureList;
 
 	// Start is called before the first frame update
 	void Start()
@@ -31,12 +37,11 @@ public class DungeonCreator : MonoBehaviour
 		CreateDungeon();
 	}
 
-
 	public void CreateDungeon()
 	{
 		wallVertical.transform.localScale = new Vector3(wallVertical.transform.localScale.x, ceilingHeight, wallVertical.transform.localScale.z);
 		wallHorizontal.transform.localScale = new Vector3(wallHorizontal.transform.localScale.x, ceilingHeight, wallHorizontal.transform.localScale.z);
-		
+
 		DungeonGenerator generator = new DungeonGenerator(dungeonWidth, dungeonLength);
 		var listOfRooms = generator.CalculateDungeon(maxIterations,
 		                                             roomWidthMin,
@@ -60,18 +65,47 @@ public class DungeonCreator : MonoBehaviour
 			if(i == 0)
 			{
 				SpawnPlayer(new Vector3(
-					(listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2, 
-					1, 
-					(listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
+				                        (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
+				                        1,
+				                        (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
+			}
+
+			if(i > 0 && i <= listOfRooms.Count / 2)
+			{
+				// Spawns random piece of furniture in middle of each room
+				SpawnFurniture(new Vector3(
+				                           (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
+				                           0,
+				                           (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
+
+				// Spawn lantern and in the middle ceiling of every room
+				SpawnTorches(new Vector3(
+				                         (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
+				                         ceilingHeight * 2.18f,
+				                         (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
 			}
 		}
 
 		CreateWalls(wallParent);
 	}
+
+	public void SpawnTorches(Vector3 position)
+	{
+		Instantiate(torch, position, Quaternion.identity);
+	}
+
+	public void SpawnFurniture(Vector3 position)
+	{
+		int rand = Random.Range(0, furnitureList.Count);
+		GameObject furniture = furnitureList[rand];
+		Instantiate(furniture, position, Quaternion.identity);
+	}
+
 	public void SpawnPlayer(Vector3 position)
 	{
 		Instantiate(player, position, Quaternion.identity);
 	}
+
 	private void CreateWalls(GameObject wallParent)
 	{
 		foreach(var wallPosition in possibleWallHorizontalPosition)
@@ -202,9 +236,8 @@ public class DungeonCreator : MonoBehaviour
 		dungeonCeiling.GetComponent<MeshFilter>().mesh = mesh;
 		dungeonCeiling.GetComponent<MeshRenderer>().material = ceilingMat;
 		dungeonCeiling.transform.parent = transform;
-
-	
 	}
+
 	private void AddWallPositionToList(Vector3 wallPosition, List<Vector3Int> wallList, List<Vector3Int> doorList)
 	{
 		Vector3Int point = Vector3Int.CeilToInt(wallPosition);
