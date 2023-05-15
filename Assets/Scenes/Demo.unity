@@ -168,6 +168,7 @@ MonoBehaviour:
   wallHorizontal: {fileID: 3869485460581719910, guid: 0b84e1940b269ca4fbec190d930348ae, type: 3}
   player: {fileID: 5400785842755360256, guid: 439561c5107f0db4cb93f7b572cdfc2a, type: 3}
   torch: {fileID: 5944970853081215761, guid: 05b9e16b85f3f0a4cadff9c106c1cdd5, type: 3}
+  wallFurniture: {fileID: 3685022225889464665, guid: a427b3dea6358574a981cbcc89c21e4a, type: 3}
   furnitureList:
   - {fileID: 111119610225983332, guid: bca653b6fdbf581448eff2419e833d79, type: 3}
   - {fileID: 111119610225983332, guid: 21214a5ab753a0d409cc0a3939869f1d, type: 3}
