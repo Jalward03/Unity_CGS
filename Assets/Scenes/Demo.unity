@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ffb10ef8b58de544a6c7e9febe3b160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dungeonWidth: 100
+  dungeonWidth: 200
   dungeonLength: 200
   roomWidthMin: 25
   roomLengthMin: 25
@@ -161,20 +161,25 @@ MonoBehaviour:
   floorMat: {fileID: 2100000, guid: b6df9718aa8737b4e86604fe29878535, type: 2}
   ceilingMat: {fileID: 2100000, guid: 094c835627124fe4bbbaa762d2240cb1, type: 2}
   roomBottomCornerModifier: 0.1
-  roomTopCornerModifier: 0.7
+  roomTopCornerModifier: 0.9
   ceilingHeight: 2
   roomOffset: 3
   wallVertical: {fileID: 4248786690725703521, guid: 76257fc4964cd484989e3a56a342b94e, type: 3}
   wallHorizontal: {fileID: 3869485460581719910, guid: 0b84e1940b269ca4fbec190d930348ae, type: 3}
   player: {fileID: 5400785842755360256, guid: 439561c5107f0db4cb93f7b572cdfc2a, type: 3}
   torch: {fileID: 5944970853081215761, guid: 05b9e16b85f3f0a4cadff9c106c1cdd5, type: 3}
-  wallFurniture: {fileID: 3685022225889464665, guid: a427b3dea6358574a981cbcc89c21e4a, type: 3}
   furnitureList:
   - {fileID: 111119610225983332, guid: bca653b6fdbf581448eff2419e833d79, type: 3}
   - {fileID: 111119610225983332, guid: 21214a5ab753a0d409cc0a3939869f1d, type: 3}
   - {fileID: 111119610225983332, guid: 5d165e3bd38d9904c9c60ecdcd8ee973, type: 3}
   - {fileID: 6001208999767239331, guid: e0a4dd55d9f62964e9adcdc089e8fbe9, type: 3}
   - {fileID: 6001208999767239331, guid: 9a1a3fbd0e8ef3e48ba78b8960929348, type: 3}
+  wallFurnitureList:
+  - {fileID: 4167157374065796193, guid: 8ebe35639d4a3374aa6ca2148c4d69f4, type: 3}
+  - {fileID: 8811068066817004914, guid: e59896f1a803351469452942f9673acc, type: 3}
+  - {fileID: 3026500165966156106, guid: e5a1e42a0a4cedb40b14db45d496292b, type: 3}
+  - {fileID: 1593785672754290792, guid: cc310b1bc6dc99d4c8ae9533ec30688f, type: 3}
+  - {fileID: 824953928613588781, guid: 2939781fc50c616468b4bb611fbe9075, type: 3}
 --- !u!4 &106468870
 Transform:
   m_ObjectHideFlags: 0

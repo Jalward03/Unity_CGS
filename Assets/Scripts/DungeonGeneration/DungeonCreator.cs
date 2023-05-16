@@ -16,10 +16,10 @@ public class DungeonCreator : MonoBehaviour
 	public int corridorWidth;
 	public Material floorMat;
 	public Material ceilingMat;
-	[Range(0.0f, 0.3f)] public float roomBottomCornerModifier;
+	[Range(0.1f, 0.3f)] public float roomBottomCornerModifier;
 	[Range(0.7f, 1.0f)] public float roomTopCornerModifier;
-	[Range(1.0f, 5.0f)] public int ceilingHeight;
-	[Range(0, 3)] public int roomOffset;
+	[Range(2.0f, 5.0f)] public int ceilingHeight;
+	[Range(3, 6)] public int roomOffset;
 
 	public GameObject wallVertical, wallHorizontal;
 	public GameObject player;
@@ -30,8 +30,8 @@ public class DungeonCreator : MonoBehaviour
 
 	[Header("Furniture")] public GameObject torch;
 
-	public GameObject wallFurniture;
 	public List<GameObject> furnitureList;
+	public List<GameObject> wallFurnitureList;
 
 	// Start is called before the first frame update
 	void Start()
@@ -59,8 +59,10 @@ public class DungeonCreator : MonoBehaviour
 		possibleWallHorizontalPosition = new List<Vector3Int>();
 		possibleWallVerticalPosition = new List<Vector3Int>();
 
+		int endRoomIndex = Random.Range(2, listOfRooms.Count / 2);
 		for(int i = 0; i < listOfRooms.Count; i++)
 		{
+			
 			CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner);
 			CreateCeiling(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner, ceilingHeight);
 
@@ -72,15 +74,16 @@ public class DungeonCreator : MonoBehaviour
 				                        1,
 				                        (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
 			}
-
+			
 			// Rooms after spawn room
-			if(i > 0 && i <= listOfRooms.Count / 2)
+			if(i > 0 && i <= listOfRooms.Count / 2 && i != endRoomIndex)
 			{
 				// Spawns random piece of furniture in middle of each room
 				SpawnFurniture(new Vector3(
 				                           (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
 				                           0,
 				                           (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
+				
 
 				// Spawn lantern and in the middle ceiling of every room
 				SpawnTorches(new Vector3(
@@ -88,17 +91,57 @@ public class DungeonCreator : MonoBehaviour
 				                         ceilingHeight * 2.18f,
 				                         (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
 			}
+			
+			// End Room
 
+			if(i == endRoomIndex)
+			{
+				
+			}
+
+			// Corridors
 			if(i > 0 && i > listOfRooms.Count / 2)
 			{
-				if((listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) < (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.x))
+				// All vertical corridor nodes
+				if((listOfRooms[i].BottomLeftAreaCorner.x - listOfRooms[i].TopRightAreaCorner.x) 
+				   < (listOfRooms[i].BottomLeftAreaCorner.y - listOfRooms[i].TopRightAreaCorner.y))
 				{
-					Instantiate(wallFurniture, new
-						            Vector3(
-						                    (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
-						                    ceilingHeight * 1.18f,
-						                    (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2 - (corridorWidth / 2)),
-					            Quaternion.Euler(-90, 180, 0));
+					// Right Side Of Wall
+					SpawnWallFurniture(
+					                   new Vector3(
+					                               (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
+					                               ceilingHeight * 1.18f,
+					                               (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2 - (corridorWidth / 2)),
+					                   Quaternion.Euler(0, 90, 0));
+					
+					// Left Side Of Wall
+					SpawnWallFurniture(
+					                   new Vector3(
+					                               (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
+					                               ceilingHeight * 1.18f,
+					                               (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2 + (corridorWidth) / 1.75f),
+					                   Quaternion.Euler(0, -90, 0));
+				}
+				
+				// All horizontal corridor nodes
+				if((listOfRooms[i].BottomLeftAreaCorner.x - listOfRooms[i].TopRightAreaCorner.x)
+				   > (listOfRooms[i].BottomLeftAreaCorner.y - listOfRooms[i].TopRightAreaCorner.y))
+				{
+					// Right Side Of Wall
+					SpawnWallFurniture(
+					                   new Vector3(
+					                               (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2 - (corridorWidth / 2),
+					                               ceilingHeight * 1.18f,
+					                               (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2),
+					                   Quaternion.Euler(0, 180, 0));
+					
+					// Left Side Of Wall
+					SpawnWallFurniture(
+					                   new Vector3(
+					                               (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2 + (corridorWidth / 1.75f),
+					                               ceilingHeight * 1.18f,
+					                               (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2),
+					                   Quaternion.Euler(0, 0, 0));
 				}
 			}
 		}
@@ -106,6 +149,13 @@ public class DungeonCreator : MonoBehaviour
 		CreateWalls(wallParent);
 	}
 
+
+	public void SpawnWallFurniture(Vector3 position, Quaternion rotation)
+	{
+		int rand = Random.Range(0, wallFurnitureList.Count);
+		GameObject wallFurniture = wallFurnitureList[rand];
+		Instantiate(wallFurniture, position, rotation);
+	}
 	public void SpawnTorches(Vector3 position)
 	{
 		Instantiate(torch, position, Quaternion.identity);
