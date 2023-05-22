@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
 
 	private void PlayerMovement()
 	{
+		
 		Vector3 delta;
 
 		Vector3 camForward = cam.transform.forward;

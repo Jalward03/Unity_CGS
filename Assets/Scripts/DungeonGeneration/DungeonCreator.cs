@@ -27,11 +27,15 @@ public class DungeonCreator : MonoBehaviour
 	List<Vector3Int> possibleDoorHorizontalPosition;
 	List<Vector3Int> possibleWallHorizontalPosition;
 	List<Vector3Int> possibleWallVerticalPosition;
+	
 
 	[Header("Furniture")] public GameObject torch;
-
+	public GameObject endRoomEscapeHatch;
 	public List<GameObject> furnitureList;
 	public List<GameObject> wallFurnitureList;
+	
+	[Header("Hazards")]
+	public List<GameObject> hazardList;
 
 	// Start is called before the first frame update
 	void Start()
@@ -59,7 +63,7 @@ public class DungeonCreator : MonoBehaviour
 		possibleWallHorizontalPosition = new List<Vector3Int>();
 		possibleWallVerticalPosition = new List<Vector3Int>();
 
-		int endRoomIndex = Random.Range(2, listOfRooms.Count / 2);
+		int endRoomIndex = Random.Range(maxIterations / 2, listOfRooms.Count / 2);
 		for(int i = 0; i < listOfRooms.Count; i++)
 		{
 			
@@ -74,6 +78,12 @@ public class DungeonCreator : MonoBehaviour
 				                        1,
 				                        (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
 			}
+
+			Instantiate(hazardList[0], new Vector3(
+			                                       (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2 + 20,
+			                                       1,
+			                                       (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2), 
+			            Quaternion.identity);
 			
 			// Rooms after spawn room
 			if(i > 0 && i <= listOfRooms.Count / 2 && i != endRoomIndex)
@@ -96,7 +106,10 @@ public class DungeonCreator : MonoBehaviour
 
 			if(i == endRoomIndex)
 			{
-				
+				SpawnHatch(new Vector3(
+				                       (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
+				                       0,
+				                       (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
 			}
 
 			// Corridors
@@ -171,6 +184,11 @@ public class DungeonCreator : MonoBehaviour
 	public void SpawnPlayer(Vector3 position)
 	{
 		Instantiate(player, position, Quaternion.identity);
+	}
+
+	public void SpawnHatch(Vector3 position)
+	{
+		Instantiate(endRoomEscapeHatch, position, Quaternion.identity);
 	}
 
 	private void CreateWalls(GameObject wallParent)
