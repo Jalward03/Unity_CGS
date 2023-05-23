@@ -312,6 +312,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DungeonCreator
       objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668241, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 553661269595668243, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
       propertyPath: m_RootOrder
       value: 2

@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using TMPro;
+
 using Unity.VisualScripting;
 
 using UnityEngine;
@@ -9,68 +11,76 @@ using UnityEngine.UI;
 
 public class PlayerHud : MonoBehaviour
 {
-	public DungeonCreator dungeon;
-	
-	[Header("Crosshair")]
-	public Sprite crosshairTexture;
+	private PlayerAttributes playerAttributes;
+	private Slider healthBar;
+	private TextMeshProUGUI healthText;
+
+	[Header("Crosshair")] public Sprite crosshairTexture;
 	public Vector2 crosshairSize;
 
-	[Header("Health")] 
-	public int maxHealth;
-	public int damageCooldown;
-	public bool canTakeDamage = true;
-	private int currentHealth;
-	
+	[Header("Health Bar")] public Image healthBarImage;
+
+	public Color criticalHealthColor;
+
+	public Color lowHealthColor;
+
+	[Range(0, 100)]
+	[Tooltip("Percentage(%)")]
+	public int lowHealthPercentage;
+
+	public Color mediumHealthColor;
+
+	[Range(0, 100)]
+	[Tooltip("Percentage(%)")]
+	public int mediumHealthPercentage;
+
+	public Color highHealthColor;
+
+	[Range(0, 100)]
+	[Tooltip("Percentage(%")]
+	public int highHealthPercentage;
+
 	private void Awake()
 	{
+		playerAttributes = GetComponentInParent<PlayerAttributes>();
+		healthBar = GetComponentInChildren<Slider>();
+		healthText = GetComponentInChildren<TextMeshProUGUI>();
+
 		SetCrosshair();
-		if(maxHealth < 1) maxHealth = 1;
-		currentHealth = maxHealth;
-
+		SetHealthBarValues();
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void SetHealthBarValues()
 	{
-		if(collision.gameObject.layer == LayerMask.NameToLayer("Hazards"))
-		{
-			StartCoroutine(TakeDamage(collision.gameObject.tag));
-		}
+		healthBar.maxValue = playerAttributes.maxHealth;
+		healthBar.value = healthBar.maxValue;
+		healthText.text = healthBar.value.ToString();
+		healthBarImage.color = GetHealthBarColor();
 	}
 
-	public IEnumerator TakeDamage(string tag)
+	private Color GetHealthBarColor()
 	{
-		if(canTakeDamage)
+		if(playerAttributes.currentHealth < playerAttributes.maxHealth * highHealthPercentage / 100)
 		{
-			currentHealth -= CalculateDamageAmount(tag);
-			canTakeDamage = false;
-		}
-
-		yield return new WaitForSeconds(damageCooldown);
-
-		canTakeDamage = true;
-
-	}
-
-	private int CalculateDamageAmount(string tag)
-	{
-		for(int i = 0; i < dungeon.hazardList.Count; i++)
-		{
-			if(dungeon.hazardList[i].CompareTag(tag))
+			if(playerAttributes.currentHealth < playerAttributes.maxHealth * mediumHealthPercentage / 100)
 			{
-				return dungeon.hazardList[i].GetComponent<Hazards>().damageAmount;
+				return playerAttributes.currentHealth < playerAttributes.maxHealth * lowHealthPercentage / 100 ? criticalHealthColor : lowHealthColor;
 			}
+			return mediumHealthColor;
 		}
-
-		return 0;
-	}
-	private void SetCrosshair()
-	{
-		GetComponentInChildren<Image>().sprite = crosshairTexture;
-		//GetComponentInChildren<Image>().rectTransform = new Rect(0, 0, crosshairSize.x, crosshairSize.y);
+		return highHealthColor;
 	}
 
 	private void Update()
 	{
-		Debug.Log(currentHealth);
+		healthBar.value = playerAttributes.currentHealth;
+		healthText.text = healthBar.value.ToString();
+		healthBarImage.color = GetHealthBarColor();
+	}
+
+	private void SetCrosshair()
+	{
+		GetComponentInChildren<Image>().sprite = crosshairTexture;
+		//crosshairTexture.rect = 
 	}
 }

@@ -23,19 +23,43 @@ public class DungeonCreator : MonoBehaviour
 
 	public GameObject wallVertical, wallHorizontal;
 	public GameObject player;
+
+	private List<GameObject> dungeonParents;
+	
+	private GameObject floorParent;
+	private GameObject ceilingParent;
+	private GameObject furnitureParent;
+	private GameObject wallFurnitureParent;
+	private GameObject torchParent;
+	private GameObject hazardParent;
+
 	List<Vector3Int> possibleDoorVerticalPosition;
 	List<Vector3Int> possibleDoorHorizontalPosition;
 	List<Vector3Int> possibleWallHorizontalPosition;
 	List<Vector3Int> possibleWallVerticalPosition;
-	
 
 	[Header("Furniture")] public GameObject torch;
 	public GameObject endRoomEscapeHatch;
 	public List<GameObject> furnitureList;
 	public List<GameObject> wallFurnitureList;
-	
-	[Header("Hazards")]
-	public List<GameObject> hazardList;
+
+	[Header("Hazards")] public List<GameObject> hazardList;
+
+	private void Awake()
+	{
+		dungeonParents = new List<GameObject>();
+		dungeonParents.Add(floorParent = new GameObject("Floor Parent"));
+		dungeonParents.Add(ceilingParent = new GameObject("Ceiling Parent"));
+		dungeonParents.Add(furnitureParent = new GameObject("Furniture Parent"));
+		dungeonParents.Add(wallFurnitureParent = new GameObject("Wall Furniture Parent"));
+		dungeonParents.Add(torchParent = new GameObject("Torch Parent"));
+		dungeonParents.Add(hazardParent = new GameObject("Hazards Parent"));
+
+		foreach(GameObject parent in dungeonParents)
+		{
+			parent.transform.parent = transform;
+		}
+	}
 
 	// Start is called before the first frame update
 	void Start()
@@ -66,7 +90,6 @@ public class DungeonCreator : MonoBehaviour
 		int endRoomIndex = Random.Range(maxIterations / 2, listOfRooms.Count / 2);
 		for(int i = 0; i < listOfRooms.Count; i++)
 		{
-			
 			CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner);
 			CreateCeiling(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner, ceilingHeight);
 
@@ -82,9 +105,9 @@ public class DungeonCreator : MonoBehaviour
 			Instantiate(hazardList[0], new Vector3(
 			                                       (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2 + 20,
 			                                       1,
-			                                       (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2), 
-			            Quaternion.identity);
-			
+			                                       (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2),
+			            Quaternion.identity, hazardParent.transform);
+
 			// Rooms after spawn room
 			if(i > 0 && i <= listOfRooms.Count / 2 && i != endRoomIndex)
 			{
@@ -93,7 +116,6 @@ public class DungeonCreator : MonoBehaviour
 				                           (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
 				                           0,
 				                           (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
-				
 
 				// Spawn lantern and in the middle ceiling of every room
 				SpawnTorches(new Vector3(
@@ -101,7 +123,7 @@ public class DungeonCreator : MonoBehaviour
 				                         ceilingHeight * 2.18f,
 				                         (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
 			}
-			
+
 			// End Room
 
 			if(i == endRoomIndex)
@@ -116,7 +138,7 @@ public class DungeonCreator : MonoBehaviour
 			if(i > 0 && i > listOfRooms.Count / 2)
 			{
 				// All vertical corridor nodes
-				if((listOfRooms[i].BottomLeftAreaCorner.x - listOfRooms[i].TopRightAreaCorner.x) 
+				if((listOfRooms[i].BottomLeftAreaCorner.x - listOfRooms[i].TopRightAreaCorner.x)
 				   < (listOfRooms[i].BottomLeftAreaCorner.y - listOfRooms[i].TopRightAreaCorner.y))
 				{
 					// Right Side Of Wall
@@ -126,7 +148,7 @@ public class DungeonCreator : MonoBehaviour
 					                               ceilingHeight * 1.18f,
 					                               (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2 - (corridorWidth / 2)),
 					                   Quaternion.Euler(0, 90, 0));
-					
+
 					// Left Side Of Wall
 					SpawnWallFurniture(
 					                   new Vector3(
@@ -135,7 +157,7 @@ public class DungeonCreator : MonoBehaviour
 					                               (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2 + (corridorWidth) / 1.75f),
 					                   Quaternion.Euler(0, -90, 0));
 				}
-				
+
 				// All horizontal corridor nodes
 				if((listOfRooms[i].BottomLeftAreaCorner.x - listOfRooms[i].TopRightAreaCorner.x)
 				   > (listOfRooms[i].BottomLeftAreaCorner.y - listOfRooms[i].TopRightAreaCorner.y))
@@ -147,7 +169,7 @@ public class DungeonCreator : MonoBehaviour
 					                               ceilingHeight * 1.18f,
 					                               (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2),
 					                   Quaternion.Euler(0, 180, 0));
-					
+
 					// Left Side Of Wall
 					SpawnWallFurniture(
 					                   new Vector3(
@@ -162,23 +184,23 @@ public class DungeonCreator : MonoBehaviour
 		CreateWalls(wallParent);
 	}
 
-
 	public void SpawnWallFurniture(Vector3 position, Quaternion rotation)
 	{
 		int rand = Random.Range(0, wallFurnitureList.Count);
 		GameObject wallFurniture = wallFurnitureList[rand];
-		Instantiate(wallFurniture, position, rotation);
+		Instantiate(wallFurniture, position, rotation, wallFurnitureParent.transform);
 	}
+
 	public void SpawnTorches(Vector3 position)
 	{
-		Instantiate(torch, position, Quaternion.identity);
+		Instantiate(torch, position, Quaternion.identity, torchParent.transform);
 	}
 
 	public void SpawnFurniture(Vector3 position)
 	{
 		int rand = Random.Range(0, furnitureList.Count);
 		GameObject furniture = furnitureList[rand];
-		Instantiate(furniture, position, Quaternion.identity);
+		Instantiate(furniture, position, Quaternion.identity, furnitureParent.transform);
 	}
 
 	public void SpawnPlayer(Vector3 position)
@@ -188,7 +210,7 @@ public class DungeonCreator : MonoBehaviour
 
 	public void SpawnHatch(Vector3 position)
 	{
-		Instantiate(endRoomEscapeHatch, position, Quaternion.identity);
+		Instantiate(endRoomEscapeHatch, position, Quaternion.identity, transform);
 	}
 
 	private void CreateWalls(GameObject wallParent)
@@ -251,7 +273,7 @@ public class DungeonCreator : MonoBehaviour
 		dungeonFloor.GetComponent<MeshFilter>().mesh = mesh;
 		dungeonFloor.GetComponent<MeshRenderer>().material = floorMat;
 		dungeonFloor.GetComponent<MeshCollider>().sharedMesh = mesh;
-		dungeonFloor.transform.parent = transform;
+		dungeonFloor.transform.parent = floorParent.transform;
 
 		for(int row = (int) bottomLeftV.x; row < (int) bottomRightV.x; row++)
 		{
@@ -320,7 +342,7 @@ public class DungeonCreator : MonoBehaviour
 		//dungeonCeiling.transform.eulerAngles = new Vector3(180, 0, 0);
 		dungeonCeiling.GetComponent<MeshFilter>().mesh = mesh;
 		dungeonCeiling.GetComponent<MeshRenderer>().material = ceilingMat;
-		dungeonCeiling.transform.parent = transform;
+		dungeonCeiling.transform.parent = ceilingParent.transform;
 	}
 
 	private void AddWallPositionToList(Vector3 wallPosition, List<Vector3Int> wallList, List<Vector3Int> doorList)
