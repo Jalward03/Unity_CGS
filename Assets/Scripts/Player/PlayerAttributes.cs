@@ -9,7 +9,7 @@ public class PlayerAttributes : MonoBehaviour
 
     [Header("Health")] 
     public int maxHealth;
-    public int damageCooldown;
+    public float damageCooldown;
     public bool canTakeDamage = true;
     public int currentHealth;
     
@@ -19,17 +19,9 @@ public class PlayerAttributes : MonoBehaviour
 	    currentHealth = maxHealth;
 
     }
+    
 
-    //private void OnControllerColliderHit(ControllerColliderHit hit)
-    //{
-	//    if(hit.gameObject.layer == LayerMask.NameToLayer("Hazards"))
-	//    {
-	//	    if(canTakeDamage) 
-	//		    StartCoroutine(TakeDamage(hit.gameObject.tag));
-	//    }
-    //}
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
 	    if(other.gameObject.layer == LayerMask.NameToLayer("Hazards"))
 	    {
@@ -54,11 +46,11 @@ public class PlayerAttributes : MonoBehaviour
     }
     private int CalculateDamageAmount(string tag)
     {
-	    for(int i = 0; i < dungeon.hazardList.Count; i++)
+	    foreach(GameObject hazard in dungeon.hazardList)
 	    {
-		    if(dungeon.hazardList[i].CompareTag(tag))
+		    if(hazard.CompareTag(tag))
 		    {
-			    return dungeon.hazardList[i].GetComponent<Hazards>().damageAmount;
+			    return hazard.GetComponent<Hazards>().damageAmount;
 		    }
 	    }
 

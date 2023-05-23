@@ -386,10 +386,11 @@ GameObject:
   - component: {fileID: 7022997244257316016}
   - component: {fileID: 4517405564271972560}
   - component: {fileID: 5519475259247527023}
-  - component: {fileID: 7846764756536186887}
   - component: {fileID: 7657003007792524430}
-  - component: {fileID: 4192378633660265542}
+  - component: {fileID: 8687664942803264705}
   - component: {fileID: 3184720473460361957}
+  - component: {fileID: 5273386710320565972}
+  - component: {fileID: 4764867107885142026}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -494,24 +495,6 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerMap
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7846764756536186887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5400785842755360256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678007b36a4b6cb42a4868df92b5ef50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 5554488921890621183}
-  movement: {fileID: 7767652400976620140, guid: 3bb217ea48524724db0b5b1ca262b8a4, type: 3}
-  look: {fileID: -4974489498034466039, guid: 3bb217ea48524724db0b5b1ca262b8a4, type: 3}
-  mouseSensitivity: 5
-  movementSpeed: 11.48
-  isGrounded: 0
 --- !u!114 &7657003007792524430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,11 +509,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dungeon: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
   maxHealth: 1000
-  damageCooldown: 1
+  damageCooldown: 0.5
   canTakeDamage: 1
   currentHealth: 0
---- !u!143 &4192378633660265542
-CharacterController:
+--- !u!114 &8687664942803264705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5400785842755360256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ac56343f7fee04bb54cf4acb0d4c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 5554488921890621183}
+  movement: {fileID: 7767652400976620140, guid: 3bb217ea48524724db0b5b1ca262b8a4, type: 3}
+  look: {fileID: -4974489498034466039, guid: 3bb217ea48524724db0b5b1ca262b8a4, type: 3}
+  mouseSensitivity: 5
+  movementAcceleration: 15
+  maxMovementSpeed: 5
+--- !u!136 &3184720473460361957
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -539,15 +540,27 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &3184720473460361957
+--- !u!54 &5273386710320565972
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5400785842755360256}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!136 &4764867107885142026
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -557,7 +570,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.6
+  m_Radius: 0.51
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
