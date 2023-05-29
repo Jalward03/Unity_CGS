@@ -5,14 +5,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMover : MonoBehaviour
 {
 	public Camera cam;
 	[SerializeField] private InputActionReference movement, look;
 	private Rigidbody rb;
-	[Range(1f, 5f)] public float mouseSensitivity;
-	[Range(5f, 20f)] public float movementAcceleration;
-	[Range(5f, 10f)] public float maxMovementSpeed;
+	[Range(1f, 30f)] public float mouseSensitivity;
+	[Range(1f, 10f)] public float movementAcceleration;
+	[Range(1f, 5f)] public float maxMovementSpeed;
 	private Vector2 movementInput;
 	private Vector2 lookInput;
 	private float xRotation = 0;
@@ -32,8 +33,6 @@ public class PlayerMover : MonoBehaviour
 		movementInput = movement.action.ReadValue<Vector2>();
 		rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxMovementSpeed);
 
-		if(movementInput.x == 0 && Math.Abs(rb.velocity.x) > 0) rb.velocity -= new Vector3(Time.deltaTime, 0, 0);
-		if(movementInput.y == 0 && Math.Abs(rb.velocity.z) > 0) rb.velocity -= new Vector3(0, 0, Time.deltaTime);
 	}
 
 	private void FixedUpdate()
@@ -43,7 +42,7 @@ public class PlayerMover : MonoBehaviour
 
 	private void PlayerMovement()
 	{
-		rb.AddForce((transform.forward * movementInput.y + transform.right * movementInput.x) * movementAcceleration, ForceMode.Acceleration);
+		rb.AddForce((transform.forward * movementInput.y + transform.right * movementInput.x) * movementAcceleration, ForceMode.Impulse);
 	}
 
 	private void PlayerLook()

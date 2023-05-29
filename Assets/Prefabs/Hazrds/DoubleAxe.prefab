@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083374758615682678}
   m_LocalRotation: {x: 0, y: 0.92387956, z: -0.38268343, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5820550062890502882}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4382155415283917411}
   - component: {fileID: -5766673408286909404}
-  - component: {fileID: 2978637161934810016}
+  - component: {fileID: 6862505894742662885}
   m_Layer: 7
   m_Name: DoubleAxe
   m_TagString: Spike
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 80
---- !u!65 &2978637161934810016
+--- !u!65 &6862505894742662885
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,5 +225,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.064497, z: 2.494804}
-  m_Center: {x: 0, y: 0.5322486, z: -0.014578342}
+  m_Size: {x: 1, y: 2.5591404, z: 2.3829014}
+  m_Center: {x: 0, y: 0.77957046, z: -0.08433545}

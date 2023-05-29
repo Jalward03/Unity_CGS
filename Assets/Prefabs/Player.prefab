@@ -528,8 +528,8 @@ MonoBehaviour:
   movement: {fileID: 7767652400976620140, guid: 3bb217ea48524724db0b5b1ca262b8a4, type: 3}
   look: {fileID: -4974489498034466039, guid: 3bb217ea48524724db0b5b1ca262b8a4, type: 3}
   mouseSensitivity: 5
-  movementAcceleration: 15
-  maxMovementSpeed: 5
+  movementAcceleration: 8
+  maxMovementSpeed: 2
 --- !u!136 &3184720473460361957
 CapsuleCollider:
   m_ObjectHideFlags: 0

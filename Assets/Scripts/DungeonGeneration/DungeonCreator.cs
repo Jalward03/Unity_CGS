@@ -25,7 +25,7 @@ public class DungeonCreator : MonoBehaviour
 	public GameObject player;
 
 	private List<GameObject> dungeonParents;
-	
+
 	private GameObject floorParent;
 	private GameObject ceilingParent;
 	private GameObject furnitureParent;
@@ -102,12 +102,6 @@ public class DungeonCreator : MonoBehaviour
 				                        (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
 			}
 
-			Instantiate(hazardList[0], new Vector3(
-			                                       (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2 + 20,
-			                                       1,
-			                                       (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2),
-			            Quaternion.identity, hazardParent.transform);
-
 			// Rooms after spawn room
 			if(i > 0 && i <= listOfRooms.Count / 2 && i != endRoomIndex)
 			{
@@ -122,8 +116,14 @@ public class DungeonCreator : MonoBehaviour
 				                         (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
 				                         ceilingHeight * 2.18f,
 				                         (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
-			}
 
+				Instantiate(hazardList[0], new Vector3(
+				                                       (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2 +
+				                                       (listOfRooms[i].BottomLeftAreaCorner.x - listOfRooms[i].TopRightAreaCorner.x) / 4,
+				                                       1,
+				                                       (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2),
+				            Quaternion.identity, hazardParent.transform);
+			}
 			// End Room
 
 			if(i == endRoomIndex)
