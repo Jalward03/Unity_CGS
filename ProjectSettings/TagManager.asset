@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Spike
+  - DoubleAxe
+  - Spear
+  - Blade
+  - Log
+  - SwingingAxe
+  - Hatch
   layers:
   - Default
   - TransparentFX

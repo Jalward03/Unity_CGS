@@ -81,6 +81,5 @@ public class PlayerHud : MonoBehaviour
 	private void SetCrosshair()
 	{
 		GetComponentInChildren<Image>().sprite = crosshairTexture;
-		//crosshairTexture.rect = 
 	}
 }

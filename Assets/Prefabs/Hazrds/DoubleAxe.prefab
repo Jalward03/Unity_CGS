@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 6862505894742662885}
   m_Layer: 7
   m_Name: DoubleAxe
-  m_TagString: Spike
+  m_TagString: DoubleAxe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

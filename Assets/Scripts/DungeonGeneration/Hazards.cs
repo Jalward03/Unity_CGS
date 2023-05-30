@@ -7,5 +7,5 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class Hazards : MonoBehaviour
 {
-	public int damageAmount;
+	[Range(1f, 100f)] public int damagePercentage;
 }

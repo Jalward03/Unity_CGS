@@ -43,7 +43,8 @@ public class DungeonCreator : MonoBehaviour
 	public List<GameObject> furnitureList;
 	public List<GameObject> wallFurnitureList;
 
-	[Header("Hazards")] public List<GameObject> hazardList;
+	[Header("Hazards")] public GameObject corridorTrap;
+	public List<GameObject> hazardList;
 
 	private void Awake()
 	{
@@ -61,7 +62,6 @@ public class DungeonCreator : MonoBehaviour
 		}
 	}
 
-	// Start is called before the first frame update
 	void Start()
 	{
 		CreateDungeon();
@@ -117,12 +117,7 @@ public class DungeonCreator : MonoBehaviour
 				                         ceilingHeight * 2.18f,
 				                         (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
 
-				Instantiate(hazardList[0], new Vector3(
-				                                       (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2 +
-				                                       (listOfRooms[i].BottomLeftAreaCorner.x - listOfRooms[i].TopRightAreaCorner.x) / 4,
-				                                       1,
-				                                       (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2),
-				            Quaternion.identity, hazardParent.transform);
+				SpawnHazards(listOfRooms, i);
 			}
 			// End Room
 
@@ -132,6 +127,8 @@ public class DungeonCreator : MonoBehaviour
 				                       (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
 				                       0,
 				                       (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
+
+				SpawnHazards(listOfRooms, i);
 			}
 
 			// Corridors
@@ -156,6 +153,17 @@ public class DungeonCreator : MonoBehaviour
 					                               ceilingHeight * 1.18f,
 					                               (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2 + (corridorWidth) / 1.75f),
 					                   Quaternion.Euler(0, -90, 0));
+
+					// Vertical
+					SpawnCorridorTrap(new Vector3(
+					                              (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2 + (corridorWidth) / 2f,
+					                              ceilingHeight * 2.3f,
+					                              (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2),
+					                  new Vector3(
+					                              (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2 - (corridorWidth) / 2f,
+					                              ceilingHeight * 2.3f,
+					                              (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2),
+					                  Quaternion.Euler(0, 90, 0));
 				}
 
 				// All horizontal corridor nodes
@@ -177,11 +185,109 @@ public class DungeonCreator : MonoBehaviour
 					                               ceilingHeight * 1.18f,
 					                               (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2),
 					                   Quaternion.Euler(0, 0, 0));
+					// Horizontal
+					SpawnCorridorTrap(new Vector3(
+					                              (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
+					                              ceilingHeight * 2.3f,
+					                              (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2 - (corridorWidth) / 2f),
+					                  new Vector3(
+					                              (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
+					                              ceilingHeight * 2.3f,
+					                              (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2 + (corridorWidth) / 2f),
+					                  Quaternion.identity);
 				}
 			}
 		}
 
 		CreateWalls(wallParent);
+	}
+
+	public int GetNewRand(int maxNum)
+	{
+		int rand = Random.Range(0, maxNum);
+
+		return rand;
+	}
+
+	public void SpawnCorridorTrap(Vector3 position1, Vector3 position2, Quaternion rotation)
+	{
+		if(GetNewRand(2) == 1)
+		{
+			Instantiate(corridorTrap, position1, rotation, hazardParent.transform);
+		}
+
+		if(GetNewRand(2) == 1)
+		{
+			Instantiate(corridorTrap, position2, rotation, hazardParent.transform);
+		}
+	}
+
+	public void SpawnHazards(List<Node> listOfRooms, int index)
+	{
+		List<Vector3> hazardSpawnPositions = new List<Vector3>();
+
+		// Top Right corner
+		hazardSpawnPositions.Add(new Vector3(
+		                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2 +
+		                                     (listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].TopRightAreaCorner.x) / 4,
+		                                     0,
+		                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2 +
+		                                     (listOfRooms[index].BottomLeftAreaCorner.y - listOfRooms[index].TopRightAreaCorner.y) / 4));
+		// Bottom Right corner
+		hazardSpawnPositions.Add(new Vector3(
+		                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2 +
+		                                     (listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].TopRightAreaCorner.x) / 4,
+		                                     0,
+		                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2 -
+		                                     (listOfRooms[index].BottomLeftAreaCorner.y - listOfRooms[index].TopRightAreaCorner.y) / 4));
+		// Top left corner
+		hazardSpawnPositions.Add(new Vector3(
+		                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2 -
+		                                     (listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].TopRightAreaCorner.x) / 4,
+		                                     0,
+		                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2 +
+		                                     (listOfRooms[index].BottomLeftAreaCorner.y - listOfRooms[index].TopRightAreaCorner.y) / 4));
+		// Bottom left corner
+		hazardSpawnPositions.Add(new Vector3(
+		                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2 -
+		                                     (listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].TopRightAreaCorner.x) / 4,
+		                                     0,
+		                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2 -
+		                                     (listOfRooms[index].BottomLeftAreaCorner.y - listOfRooms[index].TopRightAreaCorner.y) / 4));
+
+		if(Mathf.Abs(listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].BottomRightAreaCorner.x) > 50.0f)
+		{
+			hazardSpawnPositions.Add(new Vector3(
+			                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2 +
+			                                     (listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].TopRightAreaCorner.x) / 3,
+			                                     0,
+			                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2));
+			hazardSpawnPositions.Add(new Vector3(
+			                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2 -
+			                                     (listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].TopRightAreaCorner.x) / 3,
+			                                     0,
+			                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2));
+		}
+
+		if(Mathf.Abs(listOfRooms[index].TopRightAreaCorner.y - listOfRooms[index].BottomRightAreaCorner.y) > 50.0f)
+		{
+			hazardSpawnPositions.Add(new Vector3(
+			                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2,
+			                                     0,
+			                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2 -
+			                                     (listOfRooms[index].BottomLeftAreaCorner.y - listOfRooms[index].TopRightAreaCorner.y) / 3));
+			hazardSpawnPositions.Add(new Vector3(
+			                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2,
+			                                     0,
+			                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2 -
+			                                     (listOfRooms[index].BottomLeftAreaCorner.y - listOfRooms[index].TopRightAreaCorner.y) / 3));
+		}
+
+		foreach(Vector3 pos in hazardSpawnPositions)
+		{
+			GameObject hazard = hazardList[GetNewRand(hazardList.Count)];
+			Instantiate(hazard, pos, Quaternion.identity, hazardParent.transform);
+		}
 	}
 
 	public void SpawnWallFurniture(Vector3 position, Quaternion rotation)
