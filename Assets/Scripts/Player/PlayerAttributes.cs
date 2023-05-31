@@ -14,6 +14,8 @@ public class PlayerAttributes : MonoBehaviour
 	public bool canTakeDamage = true;
 	public int currentHealth;
 
+	private bool playerDied;
+
 	private void Awake()
 	{
 		if(maxHealth < 1) maxHealth = 1;
@@ -42,13 +44,23 @@ public class PlayerAttributes : MonoBehaviour
 		canTakeDamage = true;
 	}
 
+	private IEnumerator PlayerDeath()
+	{
+		playerDied = true;
+		GetComponent<PlayerMover>().canMove = false;
+		GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+		GetComponent<Rigidbody>().AddForce(-transform.forward, ForceMode.Impulse);
+
+		yield return new WaitForSeconds(2.5f);
+
+		SceneManager.LoadScene("Demo");
+	}
+
 	private void Update()
 	{
-		if(currentHealth <= 0)
+		if(currentHealth <= 0 && !playerDied)
 		{
-			SceneManager.LoadScene("Demo");
-			Debug.Log("Player Died");
-			
+			StartCoroutine(PlayerDeath());
 		}
 	}
 
@@ -59,7 +71,6 @@ public class PlayerAttributes : MonoBehaviour
 			if(hazard.CompareTag(tag))
 			{
 				return maxHealth * hazard.GetComponent<Hazards>().damagePercentage / 100;
-
 			}
 		}
 

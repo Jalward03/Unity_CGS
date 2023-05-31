@@ -156,11 +156,11 @@ public class DungeonCreator : MonoBehaviour
 
 					// Vertical
 					SpawnCorridorTrap(new Vector3(
-					                              (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2 + (corridorWidth) / 2f,
+					                              (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2 - (corridorWidth) / 2f,
 					                              ceilingHeight * 2.3f,
 					                              (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2),
 					                  new Vector3(
-					                              (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2 - (corridorWidth) / 2f,
+					                              (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2 + (corridorWidth) / 2f,
 					                              ceilingHeight * 2.3f,
 					                              (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2),
 					                  Quaternion.Euler(0, 90, 0));
@@ -211,6 +211,7 @@ public class DungeonCreator : MonoBehaviour
 
 	public void SpawnCorridorTrap(Vector3 position1, Vector3 position2, Quaternion rotation)
 	{
+		// Chooses to spawn 0, 1, or 2 traps on each corridor
 		if(GetNewRand(2) == 1)
 		{
 			Instantiate(corridorTrap, position1, rotation, hazardParent.transform);
@@ -255,32 +256,66 @@ public class DungeonCreator : MonoBehaviour
 		                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2 -
 		                                     (listOfRooms[index].BottomLeftAreaCorner.y - listOfRooms[index].TopRightAreaCorner.y) / 4));
 
+		
+		// Spawn extra hazards for rooms wider than 50
 		if(Mathf.Abs(listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].BottomRightAreaCorner.x) > 50.0f)
 		{
 			hazardSpawnPositions.Add(new Vector3(
-			                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2 +
-			                                     (listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].TopRightAreaCorner.x) / 3,
+			                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2 -
+			                                     (listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].TopRightAreaCorner.x) / 2.5f,
 			                                     0,
 			                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2));
 			hazardSpawnPositions.Add(new Vector3(
-			                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2 -
-			                                     (listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].TopRightAreaCorner.x) / 3,
+			                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2 +
+			                                     (listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].TopRightAreaCorner.x) / 2.5f,
 			                                     0,
 			                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2));
+			
+			// Spawn extra hazards for rooms wider than 75
+			if(Mathf.Abs(listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].BottomRightAreaCorner.x) > 75.0f)
+			{
+				hazardSpawnPositions.Add(new Vector3(
+					(listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2 -
+					(listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].TopRightAreaCorner.x) / 6f,
+					0,
+					(listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2));
+				hazardSpawnPositions.Add(new Vector3(
+					(listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2 +
+					(listOfRooms[index].BottomLeftAreaCorner.x - listOfRooms[index].TopRightAreaCorner.x) / 6f,
+					0,
+					(listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2));
+			}
 		}
-
+		
+		// Spawn extra hazards for rooms longer than 50
 		if(Mathf.Abs(listOfRooms[index].TopRightAreaCorner.y - listOfRooms[index].BottomRightAreaCorner.y) > 50.0f)
 		{
 			hazardSpawnPositions.Add(new Vector3(
 			                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2,
 			                                     0,
-			                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2 -
-			                                     (listOfRooms[index].BottomLeftAreaCorner.y - listOfRooms[index].TopRightAreaCorner.y) / 3));
+			                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2 +
+			                                     (listOfRooms[index].BottomLeftAreaCorner.y - listOfRooms[index].TopRightAreaCorner.y) / 2.5f));
 			hazardSpawnPositions.Add(new Vector3(
 			                                     (listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2,
 			                                     0,
 			                                     (listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2 -
-			                                     (listOfRooms[index].BottomLeftAreaCorner.y - listOfRooms[index].TopRightAreaCorner.y) / 3));
+			                                     (listOfRooms[index].BottomLeftAreaCorner.y - listOfRooms[index].TopRightAreaCorner.y) / 2.5f));
+
+			// Spawn extra hazards for rooms longer than 75
+			if(Mathf.Abs(listOfRooms[index].TopRightAreaCorner.y - listOfRooms[index].BottomRightAreaCorner.y) > 75.0f)
+			{
+				hazardSpawnPositions.Add(new Vector3(
+					(listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2,
+					0,
+					(listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2 +
+					(listOfRooms[index].BottomLeftAreaCorner.y - listOfRooms[index].TopRightAreaCorner.y) / 6));
+				hazardSpawnPositions.Add(new Vector3(
+					(listOfRooms[index].BottomLeftAreaCorner.x + listOfRooms[index].TopRightAreaCorner.x) / 2,
+					0,
+					(listOfRooms[index].BottomLeftAreaCorner.y + listOfRooms[index].TopRightAreaCorner.y) / 2 -
+					(listOfRooms[index].BottomLeftAreaCorner.y - listOfRooms[index].TopRightAreaCorner.y) / 6f));
+			}
+			
 		}
 
 		foreach(Vector3 pos in hazardSpawnPositions)
@@ -408,6 +443,7 @@ public class DungeonCreator : MonoBehaviour
 
 	private void CreateCeiling(Vector2 bottomLeftCorner, Vector2 topRightCorner, int ceilingHeight)
 	{
+		// Same as floor but Y position adjusted by ceiling height variable
 		Vector3 bottomLeftV = new Vector3(bottomLeftCorner.x, ceilingHeight, bottomLeftCorner.y);
 		Vector3 bottomRightV = new Vector3(topRightCorner.x, ceilingHeight, bottomLeftCorner.y);
 		Vector3 topLeftV = new Vector3(bottomLeftCorner.x, ceilingHeight, topRightCorner.y);

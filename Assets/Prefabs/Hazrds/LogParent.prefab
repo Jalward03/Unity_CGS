@@ -92,8 +92,8 @@ MonoBehaviour:
   spinOnYAxis: 1
   spinOnZAxis: 0
   counterClockWise: 1
-  randomDirection: 0
-  rotationSpeed: 80
+  randomDirection: 1
+  rotationSpeed: 150
 --- !u!1 &4875167473182162623
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,8 @@ public class PlayerMover : MonoBehaviour
 	private float xRotation = 0;
 	private Vector3 hitDirection;
 
+	[HideInInspector] public bool canMove = true;
+	
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
@@ -29,7 +31,9 @@ public class PlayerMover : MonoBehaviour
 
 	private void Update()
 	{
-		PlayerLook();
+		if(canMove) 
+			PlayerLook();
+		
 		movementInput = movement.action.ReadValue<Vector2>();
 		rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxMovementSpeed);
 
@@ -37,7 +41,8 @@ public class PlayerMover : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		PlayerMovement();
+		if(canMove) 
+			PlayerMovement();
 	}
 
 	private void PlayerMovement()
@@ -61,6 +66,5 @@ public class PlayerMover : MonoBehaviour
 
 		cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 		transform.Rotate(Vector3.up * mouseX);
-		//Quaternion.Slerp(cam.transform.localRotation, Quaternion.Euler(Vector3.up * mouseX), Time.deltaTime);
 	}
 }
