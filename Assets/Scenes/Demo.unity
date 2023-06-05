@@ -309,8 +309,36 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: roomOffset
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: dungeonWidth
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: roomWidthMin
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
       propertyPath: ceilingHeight
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: corridorWidth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: dungeonLength
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: maxIterations
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: roomLengthMin
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 553661269595668241, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
       propertyPath: m_Name
