@@ -334,7 +334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
       propertyPath: maxIterations
-      value: 39
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
       propertyPath: roomLengthMin
