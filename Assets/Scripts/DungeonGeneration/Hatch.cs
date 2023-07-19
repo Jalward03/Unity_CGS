@@ -11,7 +11,9 @@ public class Hatch : MonoBehaviour
 	{
 		if(other.CompareTag("Player"))
 		{
-			SceneManager.LoadScene("Demo");
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
+			SceneManager.LoadScene("LevelComplete");
 		}
 	}
 }

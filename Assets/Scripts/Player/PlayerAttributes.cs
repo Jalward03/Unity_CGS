@@ -52,8 +52,9 @@ public class PlayerAttributes : MonoBehaviour
 		GetComponent<Rigidbody>().AddForce(-transform.forward, ForceMode.Impulse);
 
 		yield return new WaitForSeconds(2.5f);
-
-		SceneManager.LoadScene("Demo");
+		Cursor.visible = true;
+		Cursor.lockState = CursorLockMode.None;
+		SceneManager.LoadScene("LevelFailed");
 	}
 
 	private void Update()

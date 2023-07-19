@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Demo.unity
     guid: fba5f130f079af749aef5c51df0d6e9d
+  - enabled: 1
+    path: Assets/Scenes/LevelComplete.unity
+    guid: 4a187bc19c0669947afb4a8e0a4c2f90
+  - enabled: 1
+    path: Assets/Scenes/LevelFailed.unity
+    guid: b6338190d4829f441b8d3e8a00c32e31
   m_configObjects: {}
