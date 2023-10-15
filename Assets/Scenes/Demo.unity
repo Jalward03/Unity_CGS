@@ -376,6 +376,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: haveTorches
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: maxHazardsPerRoom
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 553661269595668241, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
       propertyPath: m_Name
       value: DungeonCreator
