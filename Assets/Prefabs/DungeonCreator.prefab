@@ -59,6 +59,9 @@ MonoBehaviour:
   wallVertical: {fileID: 4248786690725703521, guid: 76257fc4964cd484989e3a56a342b94e, type: 3}
   wallHorizontal: {fileID: 3869485460581719910, guid: 0b84e1940b269ca4fbec190d930348ae, type: 3}
   player: {fileID: 5400785842755360256, guid: 439561c5107f0db4cb93f7b572cdfc2a, type: 3}
+  haveFurniture: 1
+  haveWallFurniture: 1
+  haveTorches: 1
   torch: {fileID: 5944970853081215761, guid: 05b9e16b85f3f0a4cadff9c106c1cdd5, type: 3}
   endRoomEscapeHatch: {fileID: 8170498474860504444, guid: 31cf4794891af3f4180fad2f3e6e7393, type: 3}
   furnitureList:
@@ -73,9 +76,19 @@ MonoBehaviour:
   - {fileID: 3026500165966156106, guid: e5a1e42a0a4cedb40b14db45d496292b, type: 3}
   - {fileID: 1593785672754290792, guid: cc310b1bc6dc99d4c8ae9533ec30688f, type: 3}
   - {fileID: 824953928613588781, guid: 2939781fc50c616468b4bb611fbe9075, type: 3}
+  haveCorridorTraps: 1
+  maxHazardsPerRoom: 20
   corridorTrap: {fileID: 2120140332052952248, guid: 1fabcbbf30f1e25419015d510e975d48, type: 3}
   hazardList:
   - {fileID: 3725695377311567261, guid: 22f39d6fb4f54a040a8c23f256d78a56, type: 3}
   - {fileID: 5099708684326556757, guid: 2d7762bbd9e772540bb4b91133264cf4, type: 3}
   - {fileID: 6112327707126349907, guid: 3b9c1f5e27cc4344db692372baa8c074, type: 3}
   - {fileID: 9178141853328701441, guid: 2928ba18bb492464d810441fddbf3abc, type: 3}
+  haveStartingRoom: 1
+  haveEscapeHatchRoom: 1
+  haveMiniMap: 1
+  miniMapZoom: 10
+  miniMapCam: {fileID: 8974458103908032865, guid: 86dc7394c23dcf648b7cf97114a4b393, type: 3}
+  minimapCanvas: {fileID: 3559935195384564954, guid: e8b18ff061c17704486d5df9d3932f58, type: 3}
+  playerIcon: {fileID: 3863340071028879747, guid: 58d96dfa43047044b9730bc4526fe7f9, type: 3}
+  spawnIcon: {fileID: 8442426343069284217, guid: 94c306acfc2a2d34e850bb33af52cc23, type: 3}

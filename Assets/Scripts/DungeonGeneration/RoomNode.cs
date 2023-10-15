@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class RoomNode : Node
 {
+	// Assigns room specific data using the node class
 	public RoomNode(Vector2Int bottomLeftAreaCorner, Vector2Int topRightAreaCorner, Node parentNode, int index) : base(parentNode)
 	{
 		this.BottomLeftAreaCorner = bottomLeftAreaCorner;

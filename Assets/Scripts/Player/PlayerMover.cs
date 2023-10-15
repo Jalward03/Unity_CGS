@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMover : MonoBehaviour
 {
+	
 	public Camera cam;
 	[SerializeField] private InputActionReference movement, look;
 	private Rigidbody rb;
@@ -33,8 +34,10 @@ public class PlayerMover : MonoBehaviour
 	{
 		if(canMove) 
 			PlayerLook();
-		
+		// Gets data from input
 		movementInput = movement.action.ReadValue<Vector2>();
+		
+		// Caps speed
 		rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxMovementSpeed);
 
 	}
@@ -47,11 +50,13 @@ public class PlayerMover : MonoBehaviour
 
 	private void PlayerMovement()
 	{
+		// Adds force in direction calculated by keyboard input
 		rb.AddForce((transform.forward * movementInput.y + transform.right * movementInput.x) * movementAcceleration, ForceMode.Impulse);
 	}
 
 	private void PlayerLook()
 	{
+		// Assigns camera rotation to mouse input and clamps Y rotation at -80- and 80
 		Vector3 camForward = cam.transform.forward;
 		camForward.y = 0;
 		transform.forward = camForward;

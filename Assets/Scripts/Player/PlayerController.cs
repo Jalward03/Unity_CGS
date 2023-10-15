@@ -8,6 +8,22 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
+	// ONLY A BACKUP. NOT BEING USED ************************************************************************
 	public Camera cam;
 	[SerializeField] private InputActionReference movement, look;
 	private CharacterController cc;

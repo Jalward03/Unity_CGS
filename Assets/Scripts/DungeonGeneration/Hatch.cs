@@ -9,6 +9,7 @@ public class Hatch : MonoBehaviour
 {
 	private void OnTriggerEnter(Collider other)
 	{
+		// Win Condition
 		if(other.CompareTag("Player"))
 		{
 			Cursor.visible = true;

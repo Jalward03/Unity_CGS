@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Line
 {
+	// Stores the data used to split the spaces
 	Orientation orientation;
 	Vector2Int coordinates;
 

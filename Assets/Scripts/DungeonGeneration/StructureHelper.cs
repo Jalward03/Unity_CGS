@@ -9,6 +9,7 @@ public static class StructureHelper
 {
 	public static List<Node> TraverseGraphToExtractLowestLeaves(Node parentNode)
 	{
+		// Re-Assigns parents of nodes
 		Queue<Node> nodesToCheck = new Queue<Node>();
 		List<Node> listToReturn = new List<Node>();
 		if(parentNode.ChildrenNodeList.Count == 0)
@@ -42,6 +43,7 @@ public static class StructureHelper
 
 	public static Vector2Int GenerateBottomLeftCornerBetween(Vector2Int boundaryLeftPoint, Vector2Int boundaryRightPoint, float pointModifier, int offset)
 	{
+		// Assigns bottom left vertices of a room
 		int minX = boundaryLeftPoint.x + offset;
 		int maxX = boundaryRightPoint.x - offset;
 		int minY = boundaryLeftPoint.y + offset;
@@ -54,6 +56,7 @@ public static class StructureHelper
 	
 	public static Vector2Int GenerateTopRightCornerBetween(Vector2Int boundaryLeftPoint, Vector2Int boundaryRightPoint, float pointModifier, int offset)
 	{
+		// Assigns top right vertices of a room
 		int minX = boundaryLeftPoint.x + offset;
 		int maxX = boundaryRightPoint.x - offset;
 		int minY = boundaryLeftPoint.y + offset;
@@ -69,6 +72,7 @@ public static class StructureHelper
 
 	public enum RelativePosition
 	{
+		// Identifier for corridor direction
 		Up,
 		Down,
 		Right,
@@ -77,6 +81,7 @@ public static class StructureHelper
 
 	public static Vector2Int CalculateMiddlePoint(Vector2Int v1, Vector2Int v2)
 	{
+		// Calculates middle points using bottom left vertices and top right vertices
 		Vector2 sum = v1 + v2;
 		Vector2 tempVector = sum / 2;
 

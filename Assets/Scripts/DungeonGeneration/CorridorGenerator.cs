@@ -10,6 +10,7 @@ public class CorridorGenerator
 
 	public List<Node> CreateCorridor(List<RoomNode> allNodesCollection, int corridorWidth)
 	{
+		// Uses the collected nodes to add to a list of corridors
 		List<Node> corridorList = new List<Node>();
 		Queue<RoomNode> structuresToCheck = new Queue<RoomNode>
 			(allNodesCollection.OrderByDescending(node => node.TreeLayerIndex).ToList());

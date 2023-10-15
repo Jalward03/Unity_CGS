@@ -16,11 +16,13 @@ public class BinarySpacePartitioner
 
 	public BinarySpacePartitioner(int dungeonWidth, int dungeonLength)
 	{
+		// Assigns new room now and assigns top right vertices with dungeon sizes
 		this.rootNode = new RoomNode(new Vector2Int(0, 0), new Vector2Int(dungeonWidth, dungeonLength), null, 0);
 	}
 
 	public List<RoomNode> PrepareNodesCollection(int maxIterations, int roomWidthMin, int roomLengthMin)
 	{
+		// Adds all valid nodes into lists within the dungeon constraints
 		Queue<RoomNode> graph = new Queue<RoomNode>();
 		List<RoomNode> listToReturn = new List<RoomNode>();
 		graph.Enqueue(this.rootNode);
@@ -41,6 +43,7 @@ public class BinarySpacePartitioner
 
 	private void SplitTheSpace(RoomNode currentNode, List<RoomNode> listToReturn, int roomLengthMin, int roomWidthMin, Queue<RoomNode> graph)
 	{
+		// Splits the space using the current nodes vertices and adds new updated nodes to new list
 		Line line = GetLineDividingSpace
 			(
 			 currentNode.BottomLeftAreaCorner,
@@ -77,12 +80,14 @@ public class BinarySpacePartitioner
 
 	private void AddNewNodeToCollections(List<RoomNode> listToReturn, Queue<RoomNode> graph, RoomNode node)
 	{
+		// Adds updated nodes to new list
 		listToReturn.Add(node);
 		graph.Enqueue(node);
 	}
 
 	private Line GetLineDividingSpace(Vector2Int bottomLeftAreaCorner, Vector2Int topRightAreaCorner, int roomWidthMin, int roomLengthMin)
 	{
+ 		// Uses the orientation data to find correct space to divide
 		Orientation orientation;
 		bool lengthStatus = (topRightAreaCorner.y - bottomLeftAreaCorner.y) >= 2 * roomLengthMin;
 		bool widthStatus = (topRightAreaCorner.x - bottomLeftAreaCorner.x) >= 2 * roomWidthMin;
@@ -105,6 +110,7 @@ public class BinarySpacePartitioner
 
 	private Vector2Int GetCoordinatesForOrientation(Orientation orientation, Vector2Int bottomLeftAreaCorner, Vector2Int topRightAreaCorner, int roomWidthMin, int roomLengthMin)
 	{
+		// Assigns the coordinate variables
 		Vector2Int coordinates = Vector2Int.zero;
 		if(orientation == Orientation.Horizontal)
 		{

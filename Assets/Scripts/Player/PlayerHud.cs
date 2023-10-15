@@ -42,6 +42,7 @@ public class PlayerHud : MonoBehaviour
 
 	private void Awake()
 	{
+		// Gets player data from child objects
 		playerAttributes = GetComponentInParent<PlayerAttributes>();
 		healthBar = GetComponentInChildren<Slider>();
 		healthText = GetComponentInChildren<TextMeshProUGUI>();
@@ -60,6 +61,7 @@ public class PlayerHud : MonoBehaviour
 
 	private Color GetHealthBarColor()
 	{
+		// Changes colour of health bar depending on current health
 		if(playerAttributes.currentHealth < playerAttributes.maxHealth * highHealthPercentage / 100)
 		{
 			if(playerAttributes.currentHealth < playerAttributes.maxHealth * mediumHealthPercentage / 100)

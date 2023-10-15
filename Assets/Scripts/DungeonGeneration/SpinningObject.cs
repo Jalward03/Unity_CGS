@@ -16,6 +16,7 @@ public class SpinningObject : MonoBehaviour
 
     private void Awake()
     {
+        // Randomly chooses a direction for a spinning object to rotate in
         if(randomDirection)
         {
             int rand = Random.Range(0, 2);
@@ -35,6 +36,7 @@ public class SpinningObject : MonoBehaviour
     
     void FixedUpdate()
     {
+        // Rotates Object on Y Axis.
         transform.rotation *= Quaternion.Euler(rotationValue * Time.deltaTime);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Node
 {
+	// Stores all the data needed for nodes
 	private List<Node> childrenNodeList;
 
 	public List<Node> ChildrenNodeList

@@ -17,6 +17,7 @@ public class RoomGenerator
 
 	public List<RoomNode> GenerateRoomsInGivenSpaces(List<Node> roomSpaces, float roomBottomCornerModifier, float roomTopCornerModifier, int roomOffset)
 	{
+		// Generates the list of rooms and the data needed to generate
 		List<RoomNode> listToReturn = new List<RoomNode>();
 		foreach(var space in roomSpaces)
 		{

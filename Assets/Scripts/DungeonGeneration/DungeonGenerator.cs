@@ -17,6 +17,7 @@ public class DungeonGenerator
 
 	public List<Node> CalculateDungeon(int maxIterations, int roomWidthMin, int roomLengthMin, float roomBottomCornerModifier, float roomTopCornerModifier, int roomOffset, int corridorWidth)
 	{
+		// Initialises all the variables and store them in other classes to use
 		BinarySpacePartitioner bsp = new BinarySpacePartitioner(dungeonWidth, dungeonLength);
 		allNodesCollection = bsp.PrepareNodesCollection(maxIterations, roomWidthMin, roomLengthMin);
 		List<Node> roomSpaces = StructureHelper.TraverseGraphToExtractLowestLeaves(bsp.RootNode);

@@ -18,12 +18,14 @@ public class PlayerAttributes : MonoBehaviour
 
 	private void Awake()
 	{
+		// Initialise Health variables
 		if(maxHealth < 1) maxHealth = 1;
 		currentHealth = maxHealth;
 	}
 
 	private void OnTriggerStay(Collider other)
 	{
+		// Checks overlapping of player and hazards
 		if(other.gameObject.layer == LayerMask.NameToLayer("Hazards"))
 		{
 			if(canTakeDamage)
@@ -33,6 +35,7 @@ public class PlayerAttributes : MonoBehaviour
 
 	public IEnumerator TakeDamage(string tag)
 	{
+		// Makes player take damage every second
 		if(canTakeDamage)
 		{
 			currentHealth -= CalculateDamageAmount(tag);
@@ -46,6 +49,7 @@ public class PlayerAttributes : MonoBehaviour
 
 	private IEnumerator PlayerDeath()
 	{
+		// Lose Condition
 		playerDied = true;
 		GetComponent<PlayerMover>().canMove = false;
 		GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
@@ -59,6 +63,7 @@ public class PlayerAttributes : MonoBehaviour
 
 	private void Update()
 	{
+		// Checking for lose condition
 		if(currentHealth <= 0 && !playerDied)
 		{
 			StartCoroutine(PlayerDeath());
@@ -67,6 +72,7 @@ public class PlayerAttributes : MonoBehaviour
 
 	private int CalculateDamageAmount(string tag)
 	{
+		// Calculates correct amount of damage for specific hazard
 		foreach(GameObject hazard in dungeon.hazardList)
 		{
 			if(hazard.CompareTag(tag))
