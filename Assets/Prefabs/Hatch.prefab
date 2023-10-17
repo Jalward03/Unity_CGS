@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7186591125742783201}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 475258320667930456}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Arm/Hinge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2809127065676205108}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Hinge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 2420875329576124956}
   - component: {fileID: 4024658205074858088}
   - component: {fileID: 2184671852813807346}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6435193439857028563}
   - component: {fileID: 2758516917073441704}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 8802463310275297222}
   - component: {fileID: 2130970760369834786}
   - component: {fileID: 515025477088444116}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Hatch
   m_TagString: Untagged
   m_Icon: {fileID: 0}

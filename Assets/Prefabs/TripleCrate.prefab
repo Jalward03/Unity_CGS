@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5160145230704916649}
   - component: {fileID: 815664157270314523}
   - component: {fileID: 2091741826351496674}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate_Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3248664110212056206}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 7389323873759874713}
   - component: {fileID: 7733064496215827688}
   - component: {fileID: 1557668414543611527}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate_Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 7205185844333045730}
   - component: {fileID: 4518945749943620335}
   - component: {fileID: 1469845410432491013}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Shield_Heater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 5464516509706321132}
   - component: {fileID: 867077249912368709}
   - component: {fileID: 6093097556977957779}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate_Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -474,7 +474,7 @@ GameObject:
   - component: {fileID: 2155217385354389589}
   - component: {fileID: 4421303977774752829}
   - component: {fileID: 3786579066897165981}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Goblet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3057978740149037897}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: TripleCrate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 2922858145056179982}
   - component: {fileID: 5596972297895292398}
   - component: {fileID: 677754095376481751}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate_Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -744,7 +744,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2435782379164921210}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -784,7 +784,7 @@ GameObject:
   - component: {fileID: 6087293702822410635}
   - component: {fileID: 1726656261696262590}
   - component: {fileID: 4659994756917077749}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate_Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -930,7 +930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 616430184281252584}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -966,7 +966,7 @@ GameObject:
   - component: {fileID: 125418598953562788}
   - component: {fileID: 1317393990112809927}
   - component: {fileID: 4946180047378618670}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate_Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8233188931031390337}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: SwordParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8596578281350909468}
   - component: {fileID: 4675569788025389497}
   - component: {fileID: 7423624037342754163}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}

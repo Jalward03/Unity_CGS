@@ -33,6 +33,8 @@ public class PlayerAttributes : MonoBehaviour
 		}
 	}
 
+
+
 	public IEnumerator TakeDamage(string tag)
 	{
 		// Makes player take damage every second

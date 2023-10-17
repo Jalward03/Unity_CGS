@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3700816540429277785}
   - component: {fileID: 951259928543084764}
   - component: {fileID: 2116872519789234736}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: TwoChairsTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 5422294721644018327}
   - component: {fileID: 5864846249752239534}
   - component: {fileID: 8586962512773664024}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Skull2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 2837258885920494071}
   - component: {fileID: 341692381305375139}
   - component: {fileID: 5337465525125177089}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Skull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 5501835474569965309}
   - component: {fileID: 880210174743260053}
   - component: {fileID: 1591375172978860592}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Chair_Wood2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 4529125348052996805}
   - component: {fileID: 884766184191161305}
   - component: {fileID: 6161453978344797165}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Chair_Wood1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 2220135434688351137}
   - component: {fileID: 1301049870452393671}
   - component: {fileID: 2433081863021648586}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Book1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,7 +558,7 @@ GameObject:
   - component: {fileID: 2471480702983397967}
   - component: {fileID: 7970283866435027607}
   - component: {fileID: 8708355944975385177}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Book3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 1636554657792956106}
   - component: {fileID: 4936232869432076596}
   - component: {fileID: 1199174079846642272}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Book2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

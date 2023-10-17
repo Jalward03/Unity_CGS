@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3700816540429277785}
   - component: {fileID: 951259928543084764}
   - component: {fileID: 2116872519789234736}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 2790318735076263978}
   - component: {fileID: 2330991602177486081}
   - component: {fileID: 8738067605412518634}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Shield_Heater
   m_TagString: Untagged
   m_Icon: {fileID: 0}

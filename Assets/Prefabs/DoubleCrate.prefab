@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6953674714432020834}
   - component: {fileID: 8309640062719500285}
   - component: {fileID: 3923151049507520389}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Book1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8747950850496558268}
   - component: {fileID: 608948725193217560}
   - component: {fileID: 7894315328464252270}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Skull2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4862949460341695416}
   - component: {fileID: 201149205836682143}
   - component: {fileID: 3905731137239990619}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Book2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3248664110212056206}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 7389323873759874713}
   - component: {fileID: 7733064496215827688}
   - component: {fileID: 1557668414543611527}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate_Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3057978740149037897}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: DoubleCrate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 2922858145056179982}
   - component: {fileID: 5596972297895292398}
   - component: {fileID: 677754095376481751}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate_Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -577,7 +577,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2435782379164921210}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -617,7 +617,7 @@ GameObject:
   - component: {fileID: 6087293702822410635}
   - component: {fileID: 1726656261696262590}
   - component: {fileID: 4659994756917077749}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate_Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -766,7 +766,7 @@ GameObject:
   - component: {fileID: 125418598953562788}
   - component: {fileID: 1317393990112809927}
   - component: {fileID: 4946180047378618670}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Crate_Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}

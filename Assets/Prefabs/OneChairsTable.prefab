@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3700816540429277785}
   - component: {fileID: 951259928543084764}
   - component: {fileID: 2116872519789234736}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: OneChairsTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 1071221222843699660}
   - component: {fileID: 77225960040774913}
   - component: {fileID: 1793982950161471517}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Shield_Heater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 8083787952813848728}
   - component: {fileID: 7587534174988605477}
   - component: {fileID: 4531695711606335361}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Goblet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 4529125348052996805}
   - component: {fileID: 884766184191161305}
   - component: {fileID: 6161453978344797165}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Chair_Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}

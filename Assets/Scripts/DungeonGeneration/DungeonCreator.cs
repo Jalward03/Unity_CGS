@@ -4,8 +4,12 @@ using System.Collections.Generic;
 
 using Unity.VisualScripting;
 
-using UnityEngine;
+using UnityEditor.Experimental.GraphView;
 
+using UnityEngine;
+using UnityEngine.UI;
+
+using Image = UnityEngine.UIElements.Image;
 using Random = UnityEngine.Random;
 
 public class DungeonCreator : MonoBehaviour
@@ -63,6 +67,12 @@ public class DungeonCreator : MonoBehaviour
 	public GameObject playerIcon;
 	public GameObject spawnIcon;
 
+	[Header("Map")]
+	public GameObject mapCanvas;
+	private GameObject parentMap;
+
+	private List<GameObject> miniMapTiles;
+	
 	private void Awake()
 	{
 		// Instantiates minimap components
@@ -78,6 +88,16 @@ public class DungeonCreator : MonoBehaviour
 			if(minimapCanvas) Instantiate(minimapCanvas);
 		}
 
+
+		if(mapCanvas)
+		{
+			mapCanvas = Instantiate(mapCanvas);
+			parentMap = mapCanvas.transform.GetChild(0).gameObject;
+			parentMap.GetComponent<RectTransform>().sizeDelta = new Vector2(dungeonLength, dungeonWidth);
+
+		}
+
+		//parentMap
 		// Parents every object spawned in
 		dungeonParents = new List<GameObject>();
 		dungeonParents.Add(floorParent = new GameObject("Floor Parent"));
@@ -85,7 +105,8 @@ public class DungeonCreator : MonoBehaviour
 		dungeonParents.Add(furnitureParent = new GameObject("Furniture Parent"));
 		dungeonParents.Add(wallFurnitureParent = new GameObject("Wall Furniture Parent"));
 		dungeonParents.Add(torchParent = new GameObject("Torch Parent"));
-		dungeonParents.Add(hazardParent = new GameObject("Hazards Parent"));
+		hazardParent = new GameObject("Hazards Parent");
+		hazardParent.layer = LayerMask.NameToLayer("Hazards");
 
 		foreach(GameObject parent in dungeonParents)
 		{
@@ -493,12 +514,15 @@ public class DungeonCreator : MonoBehaviour
 		mesh.triangles = triangles;
 
 		// Initialising the the mesh as a GameObject with necessary components
-		GameObject dungeonFloor = new GameObject("Floor" + bottomLeftCorner, typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
+		GameObject dungeonFloor = new GameObject("Floor" + bottomLeftCorner, typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider), typeof(PlayerFloorDetection), typeof(FloorVerticesStorage));
 		dungeonFloor.transform.position = Vector3.zero;
 		dungeonFloor.transform.localScale = Vector3.one;
 		dungeonFloor.GetComponent<MeshFilter>().mesh = mesh;
 		dungeonFloor.GetComponent<MeshRenderer>().material = floorMat;
 		dungeonFloor.GetComponent<MeshCollider>().sharedMesh = mesh;
+		dungeonFloor.GetComponent<FloorVerticesStorage>().meshVerts = vertices;
+		dungeonFloor.layer = LayerMask.NameToLayer("Water");
+		dungeonFloor.tag = "Floor";
 		dungeonFloor.transform.parent = floorParent.transform;
 
 		// Checks edges of the mesh for a potential room for a wall spawn
@@ -585,6 +609,7 @@ public class DungeonCreator : MonoBehaviour
 		dungeonCeiling.transform.localScale = Vector3.one;
 		dungeonCeiling.GetComponent<MeshFilter>().mesh = mesh;
 		dungeonCeiling.GetComponent<MeshRenderer>().material = ceilingMat;
+		
 		dungeonCeiling.transform.parent = ceilingParent.transform;
 	}
 

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7852237135500882140}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: MaceParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4346876610214562058}
   - component: {fileID: 863827643739670191}
   - component: {fileID: 3177318002648740453}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Mace
   m_TagString: Untagged
   m_Icon: {fileID: 0}

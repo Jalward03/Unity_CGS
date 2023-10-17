@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3422290250970393380}
   - component: {fileID: 1788405469724828801}
   - component: {fileID: 4554623586706427979}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9061294596409183494}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: HammerParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}

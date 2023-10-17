@@ -377,8 +377,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: mapCanvas
+      value: 
+      objectReference: {fileID: 1346999810860213496, guid: fa5ecb41e2f3c7d44be979c03c2506eb, type: 3}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: parentMap
+      value: 
+      objectReference: {fileID: 983101062581348848, guid: 31312153bc3b55e46a48e2e86b975ecf, type: 3}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: haveMiniMap
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
       propertyPath: haveTorches
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: dungeonWidth
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
       propertyPath: maxHazardsPerRoom

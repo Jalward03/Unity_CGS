@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1703049926771856588}
   - component: {fileID: 2309688516133706601}
   - component: {fileID: 570090449090523043}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4382155415283917411}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: AxeParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}

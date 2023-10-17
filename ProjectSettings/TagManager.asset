@@ -11,6 +11,8 @@ TagManager:
   - Log
   - SwingingAxe
   - Hatch
+  - Floor
+  - lolll
   layers:
   - Default
   - TransparentFX
