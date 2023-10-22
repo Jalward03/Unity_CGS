@@ -21,6 +21,7 @@ public class DungeonCreator : MonoBehaviour
 	public int maxIterations;
 	public int corridorWidth;
 	public Material floorMat;
+	public Material shopRoomMat;
 	public Material ceilingMat;
 	[Range(0.1f, 0.3f)] public float roomBottomCornerModifier;
 	[Range(0.7f, 1.0f)] public float roomTopCornerModifier;
@@ -49,6 +50,7 @@ public class DungeonCreator : MonoBehaviour
 	public bool haveTorches;
 	public GameObject torch;
 	public GameObject endRoomEscapeHatch;
+	public GameObject shopStall;
 	public List<GameObject> furnitureList;
 	public List<GameObject> wallFurnitureList;
 
@@ -60,41 +62,28 @@ public class DungeonCreator : MonoBehaviour
 	[Header("Special Rooms")] public bool haveStartingRoom;
 	public bool haveEscapeHatchRoom;
 
-	[Header("Mini Map")] public bool haveMiniMap;
-	public int miniMapZoom;
-	public GameObject miniMapCam;
-	public GameObject minimapCanvas;
-	public GameObject playerIcon;
-	public GameObject spawnIcon;
+	//[Header("Mini Map")] public bool haveMiniMap;
+	//public int miniMapZoom;
+	//public GameObject minimapCanvas;
+	//public GameObject playerIcon;
+	//public GameObject spawnIcon;
 
-	[Header("Map")]
-	public GameObject mapCanvas;
+	[Header("Map")] public GameObject mapCanvas;
 	private GameObject parentMap;
+	public Color mapRoomColor;
+	public Color mapShopRoomColor;
 
 	private List<GameObject> miniMapTiles;
-	
+
 	private void Awake()
 	{
 		// Instantiates minimap components
-		if(haveMiniMap)
-		{
-			if(miniMapCam) miniMapCam = Instantiate(miniMapCam);
-
-			if(playerIcon)
-			{
-				playerIcon = Instantiate(playerIcon);
-			}
-
-			if(minimapCanvas) Instantiate(minimapCanvas);
-		}
-
 
 		if(mapCanvas)
 		{
 			mapCanvas = Instantiate(mapCanvas);
 			parentMap = mapCanvas.transform.GetChild(0).gameObject;
-			parentMap.GetComponent<RectTransform>().sizeDelta = new Vector2(dungeonLength, dungeonWidth);
-
+			parentMap.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 200);
 		}
 
 		//parentMap
@@ -119,17 +108,7 @@ public class DungeonCreator : MonoBehaviour
 		CreateDungeon();
 	}
 
-	private void Update()
-	{
-		// Updates Icons on mini map
-		if(haveMiniMap)
-		{
-			miniMapCam.transform.position = new Vector3(player.transform.position.x, 100, player.transform.position.z);
-			miniMapCam.transform.eulerAngles = new Vector3(90, player.transform.eulerAngles.y, 0);
-			playerIcon.transform.position = new Vector3(player.transform.position.x, 50, player.transform.position.z);
-			playerIcon.transform.eulerAngles = new Vector3(playerIcon.transform.eulerAngles.x, player.transform.eulerAngles.y, 0);
-		}
-	}
+	private void Update() { }
 
 	public void CreateDungeon()
 	{
@@ -153,11 +132,18 @@ public class DungeonCreator : MonoBehaviour
 		possibleWallVerticalPosition = new List<Vector3Int>();
 
 		int endRoomIndex = Random.Range(maxIterations / 2, listOfRooms.Count / 2);
+		int shopRoomIndex = Random.Range(maxIterations / 2, listOfRooms.Count / 2);
+
+		// Fail safe in case same room
+		while(shopRoomIndex == endRoomIndex)
+		{
+			shopRoomIndex = Random.Range(maxIterations / 2, listOfRooms.Count / 2);
+		}
 
 		// Generates contents of each room in the list
 		for(int i = 0; i < listOfRooms.Count; i++)
 		{
-			CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner);
+			CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner, i == shopRoomIndex);
 			CreateCeiling(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner, ceilingHeight, false);
 
 			// Spawn Room
@@ -168,21 +154,11 @@ public class DungeonCreator : MonoBehaviour
 				                        1,
 				                        (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
 
-				if(haveMiniMap)
-				{
-					spawnIcon = Instantiate(spawnIcon);
-					spawnIcon.transform.position = new Vector3(
-					                                           (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
-					                                           49,
-					                                           (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2);
-					spawnIcon.transform.eulerAngles = new Vector3(spawnIcon.transform.eulerAngles.x, player.transform.eulerAngles.y, spawnIcon.transform.eulerAngles.z);
-				}
-
 				if(!haveStartingRoom) SpawnHazards(listOfRooms, i);
 			}
 
 			// Rooms after spawn room
-			if(i > 0 && i <= listOfRooms.Count / 2 && i != endRoomIndex)
+			if(i > 0 && i <= listOfRooms.Count / 2 && i != endRoomIndex && i != shopRoomIndex)
 			{
 				// Spawns random piece of furniture in middle of each room
 				SpawnFurniture(new Vector3(
@@ -209,6 +185,15 @@ public class DungeonCreator : MonoBehaviour
 				           haveEscapeHatchRoom);
 
 				SpawnHazards(listOfRooms, i);
+			}
+
+			// Shop Room
+			if(i == shopRoomIndex)
+			{
+				SpawnStall(new Vector3(
+				                       (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
+				                       0,
+				                       (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
 			}
 
 			// Corridors
@@ -443,6 +428,12 @@ public class DungeonCreator : MonoBehaviour
 		}
 	}
 
+	public void SpawnStall(Vector3 position)
+	{
+		
+		Instantiate(shopStall, position, Quaternion.identity, furnitureParent.transform);
+	}
+
 	public void SpawnPlayer(Vector3 position)
 	{
 		// Spawns player
@@ -474,7 +465,7 @@ public class DungeonCreator : MonoBehaviour
 		Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
 	}
 
-	private void CreateMesh(Vector2 bottomLeftCorner, Vector2 topRightCorner)
+	private void CreateMesh(Vector2 bottomLeftCorner, Vector2 topRightCorner, bool isShopRoom)
 	{
 		// Initialising the vertices of each corner into an array for mesh
 		Vector3 bottomLeftV = new Vector3(bottomLeftCorner.x, 0, bottomLeftCorner.y);
@@ -518,11 +509,17 @@ public class DungeonCreator : MonoBehaviour
 		dungeonFloor.transform.position = Vector3.zero;
 		dungeonFloor.transform.localScale = Vector3.one;
 		dungeonFloor.GetComponent<MeshFilter>().mesh = mesh;
-		dungeonFloor.GetComponent<MeshRenderer>().material = floorMat;
+		if(!isShopRoom) dungeonFloor.GetComponent<MeshRenderer>().material = floorMat;
+		if(isShopRoom)
+		{
+			dungeonFloor.tag = "Shop";
+			dungeonFloor.GetComponent<MeshRenderer>().material = shopRoomMat;
+		}
+
 		dungeonFloor.GetComponent<MeshCollider>().sharedMesh = mesh;
 		dungeonFloor.GetComponent<FloorVerticesStorage>().meshVerts = vertices;
 		dungeonFloor.layer = LayerMask.NameToLayer("Water");
-		dungeonFloor.tag = "Floor";
+
 		dungeonFloor.transform.parent = floorParent.transform;
 
 		// Checks edges of the mesh for a potential room for a wall spawn
@@ -609,7 +606,7 @@ public class DungeonCreator : MonoBehaviour
 		dungeonCeiling.transform.localScale = Vector3.one;
 		dungeonCeiling.GetComponent<MeshFilter>().mesh = mesh;
 		dungeonCeiling.GetComponent<MeshRenderer>().material = ceilingMat;
-		
+
 		dungeonCeiling.transform.parent = ceilingParent.transform;
 	}
 

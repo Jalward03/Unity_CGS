@@ -385,6 +385,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 983101062581348848, guid: 31312153bc3b55e46a48e2e86b975ecf, type: 3}
     - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: shopStall
+      value: 
+      objectReference: {fileID: 639734908323318292, guid: 63ad5a6bf5cc90d47a7913949bc8fa87, type: 3}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
       propertyPath: haveMiniMap
       value: 0
       objectReference: {fileID: 0}
@@ -393,12 +397,52 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: shopRoomMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 2558eb8ae027ae44f8442404488b1139, type: 2}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
       propertyPath: dungeonWidth
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: dungeonLength
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: mapRoomColor.a
+      value: 0.42745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: mapRoomColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: mapRoomColor.g
+      value: 0.55931616
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: mapRoomColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
       propertyPath: maxHazardsPerRoom
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: mapShopRoomColor.a
+      value: 0.42745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: mapShopRoomColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: mapShopRoomColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 553661269595668240, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
+      propertyPath: mapShopRoomColor.r
+      value: 0.9509299
       objectReference: {fileID: 0}
     - target: {fileID: 553661269595668241, guid: 858b7e2e8836567498d3a7bef32ddcd8, type: 3}
       propertyPath: m_Name

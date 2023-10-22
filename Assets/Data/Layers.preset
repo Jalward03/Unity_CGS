@@ -14,7 +14,7 @@ Preset:
   m_Properties:
   - target: {fileID: 0}
     propertyPath: tags.Array.size
-    value: 8
+    value: 9
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: tags.Array.data[0]
@@ -47,6 +47,10 @@ Preset:
   - target: {fileID: 0}
     propertyPath: tags.Array.data[7]
     value: Floor
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: tags.Array.data[8]
+    value: Shop
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: layers.Array.size
