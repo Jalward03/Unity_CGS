@@ -45,28 +45,27 @@ public class DungeonCreator : MonoBehaviour
 	List<Vector3Int> possibleWallHorizontalPosition;
 	List<Vector3Int> possibleWallVerticalPosition;
 
-	[Header("Furniture")] public bool haveFurniture;
-	public bool haveWallFurniture;
-	public bool haveTorches;
+	[Header("Furniture")]
+	public bool haveFurniture= true;
+	public bool haveWallFurniture= true;
+	public bool haveTorches= true;
 	public GameObject torch;
 	public GameObject endRoomEscapeHatch;
 	public GameObject shopStall;
 	public List<GameObject> furnitureList;
 	public List<GameObject> wallFurnitureList;
 
-	[Header("Hazards")] public bool haveCorridorTraps;
+	[Header("Hazards")]
+	public bool haveCorridorTraps= true;
 	public int maxHazardsPerRoom;
 	public GameObject corridorTrap;
 	public List<GameObject> hazardList;
 
-	[Header("Special Rooms")] public bool haveStartingRoom;
-	public bool haveEscapeHatchRoom;
+	[Header("Special Rooms")] 
+	public bool haveStartingRoom = true;
+	public bool haveEscapeHatchRoom= true;
+	public bool haveShopRoom= true;
 
-	//[Header("Mini Map")] public bool haveMiniMap;
-	//public int miniMapZoom;
-	//public GameObject minimapCanvas;
-	//public GameObject playerIcon;
-	//public GameObject spawnIcon;
 
 	[Header("Map")] public GameObject mapCanvas;
 	private GameObject parentMap;
@@ -77,7 +76,6 @@ public class DungeonCreator : MonoBehaviour
 
 	private void Awake()
 	{
-		// Instantiates minimap components
 
 		if(mapCanvas)
 		{
@@ -86,7 +84,6 @@ public class DungeonCreator : MonoBehaviour
 			parentMap.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 200);
 		}
 
-		//parentMap
 		// Parents every object spawned in
 		dungeonParents = new List<GameObject>();
 		dungeonParents.Add(floorParent = new GameObject("Floor Parent"));
@@ -107,8 +104,7 @@ public class DungeonCreator : MonoBehaviour
 	{
 		CreateDungeon();
 	}
-
-	private void Update() { }
+	
 
 	public void CreateDungeon()
 	{
@@ -143,7 +139,7 @@ public class DungeonCreator : MonoBehaviour
 		// Generates contents of each room in the list
 		for(int i = 0; i < listOfRooms.Count; i++)
 		{
-			CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner, i == shopRoomIndex);
+			CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner, (i == shopRoomIndex && haveShopRoom));
 			CreateCeiling(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner, ceilingHeight, false);
 
 			// Spawn Room
@@ -154,7 +150,21 @@ public class DungeonCreator : MonoBehaviour
 				                        1,
 				                        (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
 
-				if(!haveStartingRoom) SpawnHazards(listOfRooms, i);
+				if(!haveStartingRoom)
+				{
+					SpawnHazards(listOfRooms, i);
+
+					SpawnFurniture(new Vector3(
+					                           (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
+					                           0,
+					                           (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
+
+					// Spawn lantern and in the middle ceiling of every room
+					SpawnTorches(new Vector3(
+					                         (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
+					                         ceilingHeight * 2.18f,
+					                         (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
+				}
 			}
 
 			// Rooms after spawn room
@@ -190,10 +200,13 @@ public class DungeonCreator : MonoBehaviour
 			// Shop Room
 			if(i == shopRoomIndex)
 			{
-				SpawnStall(new Vector3(
-				                       (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
-				                       0,
-				                       (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
+				if(haveShopRoom)
+					SpawnStall(new Vector3(
+					                       (listOfRooms[i].BottomLeftAreaCorner.x + listOfRooms[i].TopRightAreaCorner.x) / 2,
+					                       0,
+					                       (listOfRooms[i].BottomLeftAreaCorner.y + listOfRooms[i].TopRightAreaCorner.y) / 2));
+
+				if(!haveShopRoom) SpawnHazards(listOfRooms, i);
 			}
 
 			// Corridors
@@ -430,7 +443,6 @@ public class DungeonCreator : MonoBehaviour
 
 	public void SpawnStall(Vector3 position)
 	{
-		
 		Instantiate(shopStall, position, Quaternion.identity, furnitureParent.transform);
 	}
 

@@ -51,6 +51,7 @@ MonoBehaviour:
   maxIterations: 30
   corridorWidth: 5
   floorMat: {fileID: 2100000, guid: b6df9718aa8737b4e86604fe29878535, type: 2}
+  shopRoomMat: {fileID: 2100000, guid: 2558eb8ae027ae44f8442404488b1139, type: 2}
   ceilingMat: {fileID: 2100000, guid: 094c835627124fe4bbbaa762d2240cb1, type: 2}
   roomBottomCornerModifier: 0.1
   roomTopCornerModifier: 0.9
@@ -64,6 +65,7 @@ MonoBehaviour:
   haveTorches: 1
   torch: {fileID: 5944970853081215761, guid: 05b9e16b85f3f0a4cadff9c106c1cdd5, type: 3}
   endRoomEscapeHatch: {fileID: 8170498474860504444, guid: 31cf4794891af3f4180fad2f3e6e7393, type: 3}
+  shopStall: {fileID: 639734908323318292, guid: 63ad5a6bf5cc90d47a7913949bc8fa87, type: 3}
   furnitureList:
   - {fileID: 111119610225983332, guid: bca653b6fdbf581448eff2419e833d79, type: 3}
   - {fileID: 111119610225983332, guid: 21214a5ab753a0d409cc0a3939869f1d, type: 3}
@@ -86,9 +88,7 @@ MonoBehaviour:
   - {fileID: 9178141853328701441, guid: 2928ba18bb492464d810441fddbf3abc, type: 3}
   haveStartingRoom: 1
   haveEscapeHatchRoom: 1
-  haveMiniMap: 1
-  miniMapZoom: 10
-  miniMapCam: {fileID: 8974458103908032865, guid: 86dc7394c23dcf648b7cf97114a4b393, type: 3}
-  minimapCanvas: {fileID: 3559935195384564954, guid: e8b18ff061c17704486d5df9d3932f58, type: 3}
-  playerIcon: {fileID: 3863340071028879747, guid: 58d96dfa43047044b9730bc4526fe7f9, type: 3}
-  spawnIcon: {fileID: 8442426343069284217, guid: 94c306acfc2a2d34e850bb33af52cc23, type: 3}
+  haveShopRoom: 1
+  mapCanvas: {fileID: 1346999810860213496, guid: fa5ecb41e2f3c7d44be979c03c2506eb, type: 3}
+  mapRoomColor: {r: 0, g: 0.55931616, b: 1, a: 0.42745098}
+  mapShopRoomColor: {r: 0.9509299, g: 1, b: 0, a: 0.42745098}
