@@ -74,8 +74,8 @@ public class PlayerFloorDetection : MonoBehaviour
 
 		newGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2
 			(
-			 verts[0].z - verts[2].z,
-			 verts[3].x - verts[2].x
+			 (verts[0].z - verts[2].z) * 2,
+			 (verts[3].x - verts[2].x ) * 2
 			);
 
 		newGameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2
