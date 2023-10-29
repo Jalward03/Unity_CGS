@@ -33,11 +33,19 @@ public abstract class Node
 		}
 	}
 
+	/// <summary>
+	/// Adds Child Node To List
+	/// </summary>
+	/// <param name="node">Node To Add</param>
 	public void AddChild(Node node)
 	{
 		childrenNodeList.Add(node);
 	}
 
+	/// <summary>
+	/// Removes Child From List
+	/// </summary>
+	/// <param name="node">Node To Remove</param>
 	public void RemoveChild(Node node)
 	{
 		childrenNodeList.Remove(node);

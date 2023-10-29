@@ -10,6 +10,7 @@ public class CorridorNode : Node
     private int corridorWidth;
     private int modifierDistanceFromWall=1;
 
+    
     public CorridorNode(Node node1, Node node2, int corridorWidth) : base(null)
     {
         this.structure1 = node1;
@@ -18,9 +19,12 @@ public class CorridorNode : Node
         GenerateCorridor();
     }
 
+    /// <summary>
+    /// Checks which direction the corridor needs to connect
+    /// </summary>
     private void GenerateCorridor()
     {
-        // Checks which direction the corridor needs to connect
+       
         var relativePositionOfStructure2 = CheckPositionStructure2AgainstStructure1();
         switch (relativePositionOfStructure2)
         {
@@ -41,9 +45,13 @@ public class CorridorNode : Node
         }
     }
 
+    /// <summary>
+    ///  Checks to see if there are available spots for a corridor stretching left or right
+    /// </summary>
+    /// <param name="structure1">Structure To Compare To</param>
+    /// <param name="structure2">Structure To Compare</param>
     private void ProcessRoomInRelationRightOrLeft(Node structure1, Node structure2)
     {
-        // Checks to see if there are available spots for a corridor stretching left or right
         Node leftStructure = null;
         List<Node> leftStructureChildren = StructureHelper.TraverseGraphToExtractLowestLeaves(structure1);
         Node rightStructure = null;
@@ -95,9 +103,17 @@ public class CorridorNode : Node
         TopRightAreaCorner = new Vector2Int(rightStructure.TopLeftAreaCorner.x, y + this.corridorWidth);
     }
 
+    
+    /// <summary>
+    /// Gets middle points for the left and right nodes
+    /// </summary>
+    /// <param name="leftNodeUp">Top Left Node</param>
+    /// <param name="leftNodeDown">Bottom Left Node</param>
+    /// <param name="rightNodeUp">Top Right Node</param>
+    /// <param name="rightNodeDown">Bottom Right Node</param>
+    /// <returns>Middle Points for left and right nodes</returns>
     private int GetValidYForNeighourLeftRight(Vector2Int leftNodeUp, Vector2Int leftNodeDown, Vector2Int rightNodeUp, Vector2Int rightNodeDown)
     {
-        // Gets middle points for the left and right nodes
         if(rightNodeUp.y >= leftNodeUp.y && leftNodeDown.y >= rightNodeDown.y)
         {
             return StructureHelper.CalculateMiddlePoint(
@@ -129,6 +145,11 @@ public class CorridorNode : Node
         return- 1;
     }
 
+    /// <summary>
+    ///  Checks to see if there are available spots for a corridor stretching up or down
+    /// </summary>
+    /// <param name="structure1">Structure To Compare To</param>
+    /// <param name="structure2">Structure To Compare</param>
     private void ProcessRoomInRelationUpOrDown(Node structure1, Node structure2)
     {
         // Checks to see if there are available spots for a corridor stretching left or right
@@ -185,10 +206,18 @@ public class CorridorNode : Node
         TopRightAreaCorner = new Vector2Int(x + this.corridorWidth, topStructure.BottomLeftAreaCorner.y);
     }
 
+    /// <summary>
+    /// Gets middle points for the top and bottom nodes
+    /// </summary>
+    /// <param name="bottomNodeLeft">Bottom Left Node</param>
+    /// <param name="bottomNodeRight">Bottom Right Node</param>
+    /// <param name="topNodeLeft">Top Left Node</param>
+    /// <param name="topNodeRight">Top Right Node</param>
+    /// <returns>Middle Points for top and bottom nodes</returns>
     private int GetValidXForNeighbourUpDown(Vector2Int bottomNodeLeft, 
         Vector2Int bottomNodeRight, Vector2Int topNodeLeft, Vector2Int topNodeRight)
     {
-        // Gets middle points for the top and bottom nodes
+        // 
 
         if(topNodeLeft.x < bottomNodeLeft.x && bottomNodeRight.x < topNodeRight.x)
         {
@@ -223,9 +252,13 @@ public class CorridorNode : Node
         return -1;
     }
 
+    /// <summary>
+    /// Checks the direction of two rooms to return the direction of the corridor will need to go
+    /// </summary>
+    /// <returns>Direction of the corridor will need to go</returns>
     private StructureHelper.RelativePosition CheckPositionStructure2AgainstStructure1()
     {
-        // Checks the direction of two rooms to return the direction of the corridor will need to go
+        
         Vector2 middlePointStructure1Temp = ((Vector2)structure1.TopRightAreaCorner + structure1.BottomLeftAreaCorner) / 2;
         Vector2 middlePointStructure2Temp = ((Vector2)structure2.TopRightAreaCorner + structure2.BottomLeftAreaCorner) / 2;
         float angle = CalculateAngle(middlePointStructure1Temp, middlePointStructure2Temp);
@@ -247,10 +280,15 @@ public class CorridorNode : Node
         }
     }
 
+    /// <summary>
+    /// Calculates the angle direction of two rooms
+    /// </summary>
+    /// <param name="middlePointStructure1Temp">Middle Point Of Structure To Compare To</param>
+    /// <param name="middlePointStructure2Temp">Middle Point Of Structure To Compare</param>
+    /// <returns>Returns the angle of the two rooms</returns>
     private float CalculateAngle(Vector2 middlePointStructure1Temp, Vector2 middlePointStructure2Temp)
     {
-        // Returns the angle of the two rooms
         return Mathf.Atan2(middlePointStructure2Temp.y - middlePointStructure1Temp.y,
-            middlePointStructure2Temp.x - middlePointStructure1Temp.x)*Mathf.Rad2Deg;
+                           middlePointStructure2Temp.x - middlePointStructure1Temp.x)*Mathf.Rad2Deg;
     }
 }

@@ -51,6 +51,9 @@ public class PlayerHud : MonoBehaviour
 		SetHealthBarValues();
 	}
 
+	/// <summary>
+	/// Sets Health Bar Values
+	/// </summary>
 	private void SetHealthBarValues()
 	{
 		healthBar.maxValue = playerAttributes.maxHealth;
@@ -59,9 +62,13 @@ public class PlayerHud : MonoBehaviour
 		healthBarImage.color = GetHealthBarColor();
 	}
 
+	/// <summary>
+	/// Changes colour of health bar depending on current health 
+	/// </summary>
+	/// <returns></returns>
 	private Color GetHealthBarColor()
 	{
-		// Changes colour of health bar depending on current health
+	
 		if(playerAttributes.currentHealth < playerAttributes.maxHealth * highHealthPercentage / 100)
 		{
 			if(playerAttributes.currentHealth < playerAttributes.maxHealth * mediumHealthPercentage / 100)
@@ -80,6 +87,9 @@ public class PlayerHud : MonoBehaviour
 		healthBarImage.color = GetHealthBarColor();
 	}
 
+	/// <summary>
+	/// Sets Crosshair
+	/// </summary>
 	private void SetCrosshair()
 	{
 		GetComponentInChildren<Image>().sprite = crosshairTexture;

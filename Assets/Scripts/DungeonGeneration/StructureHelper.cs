@@ -7,9 +7,13 @@ using Random = UnityEngine.Random;
 
 public static class StructureHelper
 {
+	/// <summary>
+	/// Re-Assigns parents of nodes
+	/// </summary>
+	/// <param name="parentNode">Parent Node</param>
+	/// <returns>Updated List</returns>
 	public static List<Node> TraverseGraphToExtractLowestLeaves(Node parentNode)
 	{
-		// Re-Assigns parents of nodes
 		Queue<Node> nodesToCheck = new Queue<Node>();
 		List<Node> listToReturn = new List<Node>();
 		if(parentNode.ChildrenNodeList.Count == 0)
@@ -41,9 +45,16 @@ public static class StructureHelper
 		return listToReturn;
 	}
 
+	/// <summary>
+	/// Assigns bottom left vertices of a room
+	/// </summary>
+	/// <param name="boundaryLeftPoint">Min And Max Points For Left</param>
+	/// <param name="boundaryRightPoint">Min And Max Points For Right</param>
+	/// <param name="pointModifier">Top Or Bottom Corner Modifier</param>
+	/// <param name="offset">Offset to Boundaries</param>
+	/// <returns>Bottom Left Vertices</returns>
 	public static Vector2Int GenerateBottomLeftCornerBetween(Vector2Int boundaryLeftPoint, Vector2Int boundaryRightPoint, float pointModifier, int offset)
 	{
-		// Assigns bottom left vertices of a room
 		int minX = boundaryLeftPoint.x + offset;
 		int maxX = boundaryRightPoint.x - offset;
 		int minY = boundaryLeftPoint.y + offset;
@@ -54,6 +65,14 @@ public static class StructureHelper
 		                      Random.Range(minY, (int) (minY + (maxY - minY) * pointModifier)));
 	}
 	
+	/// <summary>
+	/// Assigns top right vertices of a room
+	/// </summary>
+	/// <param name="boundaryLeftPoint">Min And Max Points For Left</param>
+	/// <param name="boundaryRightPoint">Min And Max Points For Right</param>
+	/// <param name="pointModifier">Top Or Bottom Corner Modifier</param>
+	/// <param name="offset">Offset to Boundaries</param>
+	/// <returns>Top Right Vertices</returns>
 	public static Vector2Int GenerateTopRightCornerBetween(Vector2Int boundaryLeftPoint, Vector2Int boundaryRightPoint, float pointModifier, int offset)
 	{
 		// Assigns top right vertices of a room
@@ -79,9 +98,15 @@ public static class StructureHelper
 		Left
 	}
 
+	/// <summary>
+	/// Calculates middle points using bottom left vertices and top right vertices
+	/// </summary>
+	/// <param name="v1">Point 1</param>
+	/// <param name="v2">Point 2</param>
+	/// <returns>Middle Point</returns>
 	public static Vector2Int CalculateMiddlePoint(Vector2Int v1, Vector2Int v2)
 	{
-		// Calculates middle points using bottom left vertices and top right vertices
+		
 		Vector2 sum = v1 + v2;
 		Vector2 tempVector = sum / 2;
 

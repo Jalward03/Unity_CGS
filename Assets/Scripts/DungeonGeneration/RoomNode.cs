@@ -13,6 +13,13 @@ public class RoomNode : Node
 		this.TreeLayerIndex = index;
 	}
 	
+	/// <summary>
+	/// Returns Width Of A Room
+	/// </summary>
 	public int Width { get => (int) (TopRightAreaCorner.x - BottomLeftAreaCorner.x); }
+	
+	/// <summary>
+	/// Returns Length Of A Room
+	/// </summary>
 	public int Length { get => (int) (TopRightAreaCorner.y - BottomLeftAreaCorner.y); }
 }

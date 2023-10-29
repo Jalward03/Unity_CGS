@@ -35,9 +35,13 @@ public class PlayerAttributes : MonoBehaviour
 
 
 
+	/// <summary>
+	/// Makes player take damage every second
+	/// </summary>
+	/// <param name="tag">Tag Of Collided Object</param>
 	public IEnumerator TakeDamage(string tag)
 	{
-		// Makes player take damage every second
+		
 		if(canTakeDamage)
 		{
 			currentHealth -= CalculateDamageAmount(tag);
@@ -49,9 +53,12 @@ public class PlayerAttributes : MonoBehaviour
 		canTakeDamage = true;
 	}
 
+	/// <summary>
+	/// Lose Condition
+	/// </summary>
 	private IEnumerator PlayerDeath()
 	{
-		// Lose Condition
+	
 		playerDied = true;
 		GetComponent<PlayerMover>().canMove = false;
 		GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
@@ -72,9 +79,14 @@ public class PlayerAttributes : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Calculates correct amount of damage for specific hazard
+	/// </summary>
+	/// <param name="tag">Tag Of Collided Object</param>
+	/// <returns>Damage Taken</returns>
 	private int CalculateDamageAmount(string tag)
 	{
-		// Calculates correct amount of damage for specific hazard
+		
 		foreach(GameObject hazard in dungeon.hazardList)
 		{
 			if(hazard.CompareTag(tag))

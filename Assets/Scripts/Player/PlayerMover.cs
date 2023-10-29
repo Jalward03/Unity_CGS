@@ -48,15 +48,21 @@ public class PlayerMover : MonoBehaviour
 			PlayerMovement();
 	}
 
+	/// <summary>
+	/// Adds force in direction calculated by keyboard input
+	/// </summary>
 	private void PlayerMovement()
 	{
-		// Adds force in direction calculated by keyboard input
+		
 		rb.AddForce((transform.forward * movementInput.y + transform.right * movementInput.x) * movementAcceleration, ForceMode.Impulse);
 	}
 
+	/// <summary>
+	/// Assigns camera rotation to mouse input and clamps Y rotation at -80- and 80
+	/// </summary>
 	private void PlayerLook()
 	{
-		// Assigns camera rotation to mouse input and clamps Y rotation at -80- and 80
+		
 		Vector3 camForward = cam.transform.forward;
 		camForward.y = 0;
 		transform.forward = camForward;

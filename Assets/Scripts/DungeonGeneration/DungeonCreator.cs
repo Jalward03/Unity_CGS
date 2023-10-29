@@ -69,6 +69,7 @@ public class DungeonCreator : MonoBehaviour
 
 	[Header("Map")] public GameObject mapCanvas;
 	private GameObject parentMap;
+	public GameObject playerIconCircle;
 	public Color mapRoomColor;
 	public Color mapShopRoomColor;
 
@@ -82,6 +83,8 @@ public class DungeonCreator : MonoBehaviour
 			mapCanvas = Instantiate(mapCanvas);
 			parentMap = mapCanvas.transform.GetChild(0).gameObject;
 			parentMap.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 200);
+			playerIconCircle = Instantiate(playerIconCircle);
+			
 		}
 
 		// Parents every object spawned in
@@ -106,9 +109,11 @@ public class DungeonCreator : MonoBehaviour
 	}
 	
 
+	/// <summary>
+	/// Creates and assigns dungeon variables from inspector
+	/// </summary>
 	public void CreateDungeon()
 	{
-		// Creates and assigns dungeon variables from inspector
 		wallVertical.transform.localScale = new Vector3(wallVertical.transform.localScale.x, ceilingHeight, wallVertical.transform.localScale.z);
 		wallHorizontal.transform.localScale = new Vector3(wallHorizontal.transform.localScale.x, ceilingHeight, wallHorizontal.transform.localScale.z);
 
@@ -280,19 +285,30 @@ public class DungeonCreator : MonoBehaviour
 		CreateWalls(wallParent);
 	}
 
+	/// <summary>
+	/// Gets a new random number within range
+	/// </summary>
+	/// <param name="maxNum">Random Max Range</param>
+	/// <returns></returns>
 	public int GetNewRand(int maxNum)
 	{
-		// Gets a new random number within range
+		
 		int rand = Random.Range(0, maxNum);
 
 		return rand;
 	}
 
+	/// <summary>
+	/// Chooses to spawn 0, 1, or 2 traps on each corridor 
+	/// </summary>
+	/// <param name="position1">Potential First Position Of a Corridor Trap</param>
+	/// <param name="position2">Potential Second Position Of a Corridor Trap</param>
+	/// <param name="rotation">Rotation Of A Potential Corridor Trap</param>
 	public void SpawnCorridorTrap(Vector3 position1, Vector3 position2, Quaternion rotation)
 	{
 		if(haveCorridorTraps)
 		{
-			// Chooses to spawn 0, 1, or 2 traps on each corridor
+			
 			if(GetNewRand(2) == 1)
 			{
 				Instantiate(corridorTrap, position1, rotation, hazardParent.transform);
@@ -305,6 +321,11 @@ public class DungeonCreator : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Spawns Random Hazards Relative To Room Sizes
+	/// </summary>
+	/// <param name="listOfRooms">List Of All Rooms</param>
+	/// <param name="index">Index Of Specified Room</param>
 	public void SpawnHazards(List<Node> listOfRooms, int index)
 	{
 		if(maxHazardsPerRoom > 0)
@@ -414,9 +435,13 @@ public class DungeonCreator : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Spawns wall furniture
+	/// </summary>
+	/// <param name="position">Position Of Wall Furniture</param>
+	/// <param name="rotation">Rotation Of Wall Furniture</param>
 	public void SpawnWallFurniture(Vector3 position, Quaternion rotation)
 	{
-		// Spawns wall furniture
 		if(haveWallFurniture)
 		{
 			int rand = Random.Range(0, wallFurnitureList.Count);
@@ -425,12 +450,20 @@ public class DungeonCreator : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Spawns A Torch
+	/// </summary>
+	/// <param name="position">Position Of Torch</param>
 	public void SpawnTorches(Vector3 position)
 	{
-		// Spawns torches
+		
 		if(haveTorches) Instantiate(torch, position, Quaternion.identity, torchParent.transform);
 	}
 
+	/// <summary>
+	/// Spawns Furniture
+	/// </summary>
+	/// <param name="position">Position Of Furniture</param>
 	public void SpawnFurniture(Vector3 position)
 	{
 		if(haveFurniture)
@@ -441,23 +474,38 @@ public class DungeonCreator : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Spawns Stall For Shop Room
+	/// </summary>
+	/// <param name="position">Position Of Stall</param>
 	public void SpawnStall(Vector3 position)
 	{
 		Instantiate(shopStall, position, Quaternion.identity, furnitureParent.transform);
 	}
 
+	/// <summary>
+	/// Spawns Player
+	/// </summary>
+	/// <param name="position">Position Of Player</param>
 	public void SpawnPlayer(Vector3 position)
 	{
-		// Spawns player
 		player = Instantiate(player, position, Quaternion.identity);
 	}
 
+	/// <summary>
+	/// Spawns hatch
+	/// </summary>
+	/// <param name="position">Position Of Hatch</param>
+	/// <param name="haveHatchRoom">Will A Hatch Spawn?</param>
 	public void SpawnHatch(Vector3 position, bool haveHatchRoom)
 	{
-		// Spawns hatch
 		if(haveHatchRoom) Instantiate(endRoomEscapeHatch, position, Quaternion.identity, transform);
 	}
 
+	/// <summary>
+	/// Creates Walls using Calculated Wall Positions
+	/// </summary>
+	/// <param name="wallParent">Parent For All Walls</param>
 	private void CreateWalls(GameObject wallParent)
 	{
 		// Instantiate a wall for every wall spawn collected
@@ -472,11 +520,23 @@ public class DungeonCreator : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Instantiates A Wall
+	/// </summary>
+	/// <param name="wallParent">Parent For A Wall</param>
+	/// <param name="wallPosition">Position Of Wall</param>
+	/// <param name="wallPrefab">Wall Prefab</param>
 	private void CreateWall(GameObject wallParent, Vector3Int wallPosition, GameObject wallPrefab)
 	{
 		Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
 	}
 
+	/// <summary>
+	/// Creates Floor Mesh
+	/// </summary>
+	/// <param name="bottomLeftCorner">Bottom Left Vertices</param>
+	/// <param name="topRightCorner">Top Right Vertices</param>
+	/// <param name="isShopRoom">Is A Shop Room?</param>
 	private void CreateMesh(Vector2 bottomLeftCorner, Vector2 topRightCorner, bool isShopRoom)
 	{
 		// Initialising the vertices of each corner into an array for mesh
@@ -560,6 +620,13 @@ public class DungeonCreator : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Creates Mesh For Ceiling
+	/// </summary>
+	/// <param name="bottomLeftCorner">Bottom Left Vertices</param>
+	/// <param name="topRightCorner">Top Right Vertices</param>
+	/// <param name="ceilingHeight">Height Of Ceiling</param>
+	/// <param name="faceUp">Will Ceiling Face Up?</param>
 	private void CreateCeiling(Vector2 bottomLeftCorner, Vector2 topRightCorner, int ceilingHeight, bool faceUp)
 	{
 		// Initialising the vertices of each corner into an array for mesh
@@ -622,9 +689,15 @@ public class DungeonCreator : MonoBehaviour
 		dungeonCeiling.transform.parent = ceilingParent.transform;
 	}
 
+	/// <summary>
+	/// Any possible spots for a wall are added into a list
+	/// </summary>
+	/// <param name="wallPosition">Position Of A Wall</param>
+	/// <param name="wallList">List Of Walls</param>
+	/// <param name="doorList">List Of Gaps</param>
 	private void AddWallPositionToList(Vector3 wallPosition, List<Vector3Int> wallList, List<Vector3Int> doorList)
 	{
-		// Any possible spots for a wall are added into a list
+		
 		Vector3Int point = Vector3Int.CeilToInt(wallPosition);
 		if(wallList.Contains(point))
 		{

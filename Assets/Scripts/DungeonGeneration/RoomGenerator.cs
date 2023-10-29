@@ -15,9 +15,17 @@ public class RoomGenerator
 		this.roomWidthMin = roomWidthMin;
 	}
 
+	/// <summary>
+	/// Generates the list of rooms and the data needed to generate
+	/// </summary>
+	/// <param name="roomSpaces">List Of Room Spaces</param>
+	/// <param name="roomBottomCornerModifier">Spacing Of Bottom Corner Vertices</param>
+	/// <param name="roomTopCornerModifier">Spacing Of Top Corner Vertices</param>
+	/// <param name="roomOffset">Distance Between Rooms</param>
+	/// <returns>List Of Room Spaces</returns>
 	public List<RoomNode> GenerateRoomsInGivenSpaces(List<Node> roomSpaces, float roomBottomCornerModifier, float roomTopCornerModifier, int roomOffset)
 	{
-		// Generates the list of rooms and the data needed to generate
+		
 		List<RoomNode> listToReturn = new List<RoomNode>();
 		foreach(var space in roomSpaces)
 		{
